@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import "./loading.css";
 
 const albumLoading = () => {
@@ -7,4 +7,4 @@ const albumLoading = () => {
   )
 }
 
-export default albumLoading
+export default memo(albumLoading)

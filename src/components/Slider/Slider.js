@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import {useNavigate} from 'react-router-dom'
-import { setCurrAlbum,setCurrSong, setIsPlayAudio } from "../../stores/Slices/setIDSlice";
+import { setAtAlbum, setCurrAlbum,setCurrSong, setIsPlayAudio } from "../../stores/Slices/setIDSlice";
 import {useDispatch,useSelector} from 'react-redux'
 
 
@@ -14,10 +14,10 @@ const SliderComponent = ({ data }) => {
   // const isPlay = useSelector(state => state.setID.isPlayAudio)
   const navigate = useNavigate()
   const settings = {
-    className: "center",
-    centerMode: true,
+    // className: "center",
+    // centerMode: true,
     infinite: true,
-    centerPadding: "60px",
+    centerPadding: "50px",
     slidesToShow: 3,
     speed: 500,
     autoplay: true,
@@ -46,11 +46,16 @@ const SliderComponent = ({ data }) => {
     if(item?.type === 1) {
       dispatch(setCurrSong(item.encodeId))
         dispatch(setIsPlayAudio(true))
+        dispatch(setAtAlbum(false))
     }
     if(item?.type ===4 || item?.type ===3){
       dispatch(setCurrAlbum(item?.encodeId))
       const albumLink = item?.link.split('.')[0]
       navigate(albumLink)
+      
+    }else{
+      dispatch(setAtAlbum(false))
+
     }
   }
   return (

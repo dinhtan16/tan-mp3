@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
 import Header from "../components/Header/Header";
 import Player from "../components/Player/Player";
 import SideBarLeft from "../components/SideBar/SideBarLeft";
@@ -8,11 +10,36 @@ import {
   LayoutContainer,
   LeftSidebarStyle,
   MidBarStyle,
-  RightSidebarStyle,
   DefaultLayout,
   PlayerStyle,
+  TopStyle,
+
 } from "../styles/layout/styled.layout";
+
+  
+
+
+const RightSidebarStyle = styled.div`
+width: 330px;
+/* display: none; */
+position: fixed;
+right: 0;
+top: 0;
+bottom: 96px;
+background-color: white;
+z-index: 999;
+transition:  transform .2s linear;
+transform: translateX(100%);
+
+&.active {
+  transform: translateX(0%);
+
+}
+
+`;
 const LayoutDefault = () => {
+  const isActiveRight = useSelector(state => state.setID.isActiveRight)
+
   return (
     <DefaultLayout>
       <LayoutContainer>
@@ -20,16 +47,19 @@ const LayoutDefault = () => {
           <SideBarLeft />
         </LeftSidebarStyle>
         <MidBarStyle>
-          <Header />
-          <RouteLayout />
+              <TopStyle>
+                <Header />
+              </TopStyle>
+                        <RouteLayout />
+              <PlayerStyle>
+              <Player />
+            </PlayerStyle>  
         </MidBarStyle>
-        <RightSidebarStyle>
+        <RightSidebarStyle className={isActiveRight ? 'active' :''}>
           <SideBarRight />
         </RightSidebarStyle>
       </LayoutContainer>
-      <PlayerStyle>
-        <Player />
-      </PlayerStyle>
+     
     </DefaultLayout>
   );
 };

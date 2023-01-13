@@ -35,18 +35,118 @@ export const LeftContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .thumb-img {
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.1);
     overflow: hidden;
     max-width: 300px;
     border-radius: 8px;
+    position: relative;
+    transition: all .3s ease;
     height: auto;
+    overflow: hidden;
     text-align: center;
+    cursor: pointer;
+    animation: spinnerCDPause 300ms linear 0s both;
+    -webkit-animation: spinnerCDPause 300ms linear 0s both;
+   -moz-animation: spinnerCDPause 300ms linear 0s both;
+    -o-animation: spinnerCDPause 300ms linear 0s  both;
+    &:hover{
+      img{
+        transform: scale(1.02);
+      }
+      .start-play{
+        display: block;
+      }
+      &::after{
+                position: absolute;
+                content: '';
+                top: 0;
+                bottom:  0;
+                left:  0;
+                right: 0;
+                background: rgb(0,0,0,0.5);
+                width: 100%;
+                height: 100%;
+            }
+    } 
     img {
+      
       vertical-align: top;
       border-radius: 8px;
       width: 100%;
+      transition: all .3s ease;
+
+      
     }
+    .playing,.start-play{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    
+    }
+    .playing{
+      z-index:1;
+    }
+    .start-play{
+      font-size: 2.5rem;
+      color:white;
+      z-index: 1;
+      display: none;
+    }
+  }
+  .thumb-img.active{
+    border-radius: 50%;
+    animation: spinnerCD 5s linear 0s infinite;
+    -webkit-animation: spinnerCD 5s linear 0s infinite;
+   -moz-animation: spinnerCD 5s linear 0s infinite;
+    -o-animation: spinnerCD 5s linear 0s infinite; 
+    &:hover{
+      &::after{
+                position: absolute;
+                content: '';
+                top: 0;
+                bottom:  0;
+                left:  0;
+                right: 0;
+                background: rgb(0,0,0,0.2) !important;
+                width: 100%;
+                height: 100%;
+            }
+    }
+    .start-play{
+      display: none;
+    }
+  }
+  @keyframes spinnerCD {
+  0% {
+    -webkit-transform:rotate(0deg);
+    -moz-transform:rotate(0deg);
+    -o-transform:rotate(0deg);
+  }
+  100% {
+    -webkit-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+  }
+ 
+  }
+  @keyframes spinnerCDPause {
+  0% {
+    border-radius: 99999px;
+
+    -webkit-transform:rotate(360deg);
+    -moz-transform:rotate(360deg);
+    -o-transform:rotate(360deg);
+  }
+  100% {
+    border-radius: 8px;
+    -webkit-transform:rotate(0deg);
+    -moz-transform:rotate(0deg);
+    -o-transform:rotate(0deg);
+  }
+ 
   }
   .thumb-bottom {
     .title span {
@@ -56,7 +156,7 @@ export const LeftContent = styled.div`
       text-transform: none;
     }
     .update {
-      margin: 0.8rem 0;
+      margin: 0.5rem 0;
       color: #333;
       font-size: 0.9rem;
     }
@@ -73,7 +173,7 @@ export const LeftContent = styled.div`
     }
     .artist-content .name .follow {
       user-select: none;
-      font-size: 1rem;
+      font-size: 0.5rem;
       color: #333;
       font-size: 0.9rem;
       margin-bottom: 0.5rem;
@@ -124,6 +224,7 @@ export const LeftContent = styled.div`
     display: flex;
     flex-direction: row;
     gap: 1rem;
+    padding-left: 10px;
     width: 100%;
     align-items: flex-start;
     .thumb-img {

@@ -13,15 +13,5 @@ a{
   color: unset;
 }
 /* the slides */
-.slick-slide {
-  margin: 0 5px !important;
 
-}
-/* the parent */
-.slick-list {
-  margin: 0 -10px !important;
-}
 /* item */  
-.slick-next,.slick-prev {
-  top: 25% !important;
-}

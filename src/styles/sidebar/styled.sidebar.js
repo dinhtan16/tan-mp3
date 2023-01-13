@@ -16,7 +16,8 @@ export const SideLeftContainer = styled.div`
   /* height: 1000vh; */
   /* position: relative; */
   /* height: 100%; */
-  height: calc(100vh - 90px);
+  height: calc(100vh - 87px);
+
 `;
 export const LogoSideBar = styled.div`
   img {

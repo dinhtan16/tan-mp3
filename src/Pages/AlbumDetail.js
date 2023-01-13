@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { getPlaylistData } from "../stores/Slices/PlaylistSlice";
 
 import { toast } from "react-toastify";
 
@@ -8,7 +9,7 @@ import { getDetailPlaylist } from "../api/getDetailPlaylistAPI";
 import { NumericFormat } from "react-number-format";
 import format from "format-duration";
 import AlbumLoading from "../components/Loading/albumLoading";
-import { BsFillPlayFill } from "react-icons/bs";
+import { BsFillPlayFill, BsPlayCircle } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FiMoreHorizontal } from "react-icons/fi";
 import { MdSwapVert } from "react-icons/md";
@@ -17,36 +18,51 @@ import {
   LeftContent,
   RightContent,
 } from "../styles/DetaiPlaylist/styled.detailplaylist";
-import { setCurrSong, setIsPlayAudio } from "../stores/Slices/setIDSlice";
+import { setAtAlbum, setCurrSong, setIsActiveTab, setIsPlayAudio } from "../stores/Slices/setIDSlice";
 import { CiMusicNote1 } from "react-icons/ci";
-
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import AudioPlaying from "../components/Loading/AudioPlaying";
 
 const AlbumDetail = () => {
   const dispatch = useDispatch();
   const { title, id } = useParams();
+  const isActive = useSelector(state => state.setID.isActiveTab)
+  const isPlayAudio = useSelector(state => state.setID.isPlayAudio)
+  const songLists = useSelector(state => state.playlist.songData)
+  // console.log(songLists)
+  const currSongID = useSelector(state => state.setID.currSongID)
   const [thumbData, setThumbData] = useState([]);
-  const [songData, setSongData] = useState([]);
+  // const [songData, setSongData] = useState([]);
   const [songOuter, setSongOuter] = useState([]);
 
   const [artistData, setArtistData] = useState([]);
-  const [isLoading, setIsLoading] = useState([]);
-  const [active, setActive] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  // const [active, setActive] = useState(null);
 
+  // const { thumbData, artistData, songOuter, songData } = useSelector(
+  //   (state) => state.playlist
+  // );
+  // const isLoadingAlbum = useSelector(state => state.setID.isLoadingAlbum)
+  // useEffect(() => {
+  //   dispatch(getPlaylistData(id));
+
+  // }, [id]);
   // console.log(thumbData);
-  useEffect(() => {
-    setIsLoading(false); //TODO:
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2200);
-    return () => {
-      clearTimeout();
-    };
-  }, []);
+  // useEffect(() => {
+  //   setIsLoading(true); //TODO:
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 2900);
+  //   return () => {
+  //     clearTimeout();
+  //   };
+  // }, []);
   useEffect(() => {
     const fetchDetailAlbumPlaylist = async () => {
       try {
+        setIsLoading(true)
         const res = await getDetailPlaylist(id);
+
         const { data } = res?.data; //lay data banner
         // console.log(data);
         setThumbData(data);
@@ -59,31 +75,52 @@ const AlbumDetail = () => {
         } = res?.data; //lay array song
 
         setSongOuter(song);
-        const {
-          data: {
-            song: { items },
-          },
-        } = res?.data; //lay array song
-        setSongData(items);
+        // const {
+        //   data: {
+        //     song: { items },
+        //   },
+        // } = res?.data; //lay array song
+        // setSongData(items);
+        setIsLoading(false)
       } catch (error) {
         console.log(error);
       }
     };
     fetchDetailAlbumPlaylist();
+     dispatch(getPlaylistData({id: id}))
+
   }, [id]);
+  // useEffect(() => {
+  //   // dispatch(getDetailPlaylist(id))
+  //   // console.log(id)
+  //   const fetch = async () => {
+  //     try {
+  //       await  dispatch(getPlaylistData(id))
+  //       return
+  //       // handle result here
+  //     } catch (rejectedValueOrSerializedError) {
+  //       // handle error here
+  //     }
+  //   }
+  //   fetch()
+  // },[id])
 
   const handleSong = (item) => {
+
+
     dispatch(setCurrSong(item?.encodeId));
     dispatch(setIsPlayAudio(true));
 
-    setActive(item);
+    dispatch(setIsActiveTab(item))
+    dispatch(setAtAlbum(true))
   };
 
   const time = new Date(Number(thumbData?.contentLastUpdate * 1000));
 
   const year = time.getUTCFullYear();
 
-  const month = time.getMonth();
+  const month = time.getUTCMonth();
+
 
   const day = time.getUTCDate();
 
@@ -91,7 +128,34 @@ const AlbumDetail = () => {
   // console.log(year); // 👉️ 2022
 
   // const month = date.getUTCMonth();
+  useEffect(() => {
+    const t = songLists?.find((item) => {
+      return item.encodeId === currSongID
+      
+    })
 
+    dispatch(setIsActiveTab(t))
+  },[])
+  const handleShuffle = () =>{
+    const audio = new Audio()
+    if(!isPlayAudio) {
+      audio.pause()
+      dispatch(setIsPlayAudio(true))
+    } else {
+    audio.pause()
+    dispatch(setIsPlayAudio(false))
+    }
+    
+    let randomIndex = Math.round(Math.random() * songLists?.length) -1
+      dispatch(setCurrSong(songLists[randomIndex].encodeId))
+      dispatch(setIsPlayAudio(true));
+      dispatch(setIsActiveTab(songLists[randomIndex]));
+  }
+  const handleDisc = () => {
+    dispatch(setCurrSong(currSongID))
+    dispatch(setIsPlayAudio(!isPlayAudio))
+
+  }
   return (
     <DetailPlaylistContainer>
       {isLoading ? (
@@ -99,8 +163,14 @@ const AlbumDetail = () => {
       ) : (
         <>
           <LeftContent>
-            <div className="thumb-img">
+            <div className={isPlayAudio ? 'thumb-img active' : 'thumb-img'} onClick={handleDisc}>
               <img src={thumbData?.thumbnailM} alt="none" />
+              <div className="playing">
+                { isPlayAudio && <AudioPlaying />}
+              </div>
+              <div className="start-play">
+                <BsPlayCircle />
+              </div>
             </div>
             <div className="thumb-bottom">
               <div className="title">
@@ -108,8 +178,8 @@ const AlbumDetail = () => {
               </div>
               <div className="update">
                 <div>
-                  Cập nhật {day}/{month === 11 && "12"}/{year}
-                </div>
+                  Cập nhật {day}/{month+1}/{year}
+                  </div>
               </div>
               <div className="artist-content">
                 {artistData?.map((item, i) => {
@@ -140,6 +210,7 @@ const AlbumDetail = () => {
                       color: "white",
                       fontWeight: 500,
                     }}
+                    onClick={handleShuffle}
                   >
                     <BsFillPlayFill />
                     <span>Phát ngẫu nhiên</span>
@@ -157,7 +228,7 @@ const AlbumDetail = () => {
             </div>
           </LeftContent>
           <RightContent>
-            <div className="description">{thumbData?.description}</div>
+            <div className="description" style={{color:'#333',fontSize:'0.96rem',padding:'0 20px',textAlign:'justify'}}>{thumbData?.description}</div>
             <div className="song-container">
               <div className="title">
                 <div className="icon-title">
@@ -168,22 +239,14 @@ const AlbumDetail = () => {
                 <div className="time-title">Thời gian</div>
               </div>
               <div>
-                {songData.map((item, i) => {
+                {songLists?.map((item, i) => {
                   const link = item.album?.link.split(".")[0];
                   const artistSong = item?.album?.artists;
-                  // const firstArtist =  artistSong?.slice(1,artistSong.length -1 ).map((item) => item.name).join()
-
-                  // const lastArtist = artistSong
-                  // ?.slice(-1)
-                  // .map((item) => item.name)
-                  // .join("");
-                  // const name = artistSong?.filter(data => data.name !== lastArtist)
-                  // console.log(name)
                   return (
                     <div
                       key={item.encodeId}
                       className={`${
-                        active == item ? "song-main active" : "song-main"
+                        isActive?.encodeId == item.encodeId ? "song-main active" : "song-main"
                       } `}
                     >
                       <div className="icon">
@@ -203,11 +266,11 @@ const AlbumDetail = () => {
                           <span className="artist">
                             {artistSong === undefined
                               ? item?.artistsNames
-                              : artistSong?.map((item, i) => {
+                              : artistSong?.map((item, index) => {
                                   return artistSong.length > 1 ? (
-                                    <span key={i} title={item.name}>
+                                    <span key={index} title={item.name}>
                                       <Link to={item.link}>
-                                        {item.name + ","}
+                                      { (index ? ', ' : '') + item.name }
                                       </Link>
                                     </span>
                                   ) : (
@@ -231,12 +294,14 @@ const AlbumDetail = () => {
                   );
                 })}
               </div>
-              <div className="total-song">
-                {Number(songOuter?.total) + " bài hát"} -{" "}
-                {format(songOuter?.totalDuration * 1000) + " giây"}
-              </div>
+  
             </div>
+            <div className="total-song">
+                {Number(songOuter?.total) + " bài hát"} -{" "}
+                { format(songOuter?.totalDuration * 1000)+' giây'}
+              </div>
           </RightContent>
+        
         </>
       )}
     </DetailPlaylistContainer>

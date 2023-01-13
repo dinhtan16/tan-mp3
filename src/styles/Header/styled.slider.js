@@ -11,15 +11,22 @@ export const SliderContainer = styled.div`
 `;
 
 export const SliderImg = styled.div`
-  min-width: 33%;
+  width:33%;
   overflow: hidden;
   cursor: pointer;
+  border-radius: 0.5rem;
+
+  &:hover{
+    img {
+      transform: scale(1.02);
+      border-radius: 0.5rem;
+
+    }
+    }
   img {
     transition: all .3s ease;
-    &:hover{
-      transform: scale(1.2);
-    }
-    width: 100%;
+    
+    width: 96%;
     object-fit: contain;
     flex: 1;
     border-radius: 0.5rem;
