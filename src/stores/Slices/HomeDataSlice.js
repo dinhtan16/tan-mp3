@@ -50,6 +50,24 @@ export const getNewRelease = createAsyncThunk("newRelease/fetch", async () => {
   const newRelease =items?.find(item => item.sectionType === "new-release")
   return newRelease;
 });
+export const getWeekChart = createAsyncThunk("weekChart/fetch", async () => {
+  const res = await getHome();
+  const {data:{items}} = res.data
+  const weekChart =items?.find(item => item.sectionType === "weekChart")
+  return weekChart;
+});
+export const getEvent = createAsyncThunk("events/fetch", async () => {
+  const res = await getHome();
+  const {data:{items}} = res.data
+  const events =items?.find(item => item.title === "Sự kiện")
+  return events;
+});
+export const getChart = createAsyncThunk("chart/fetch", async () => {
+  const res = await getHome();
+  const {data:{items}} = res.data
+  const chart =items?.find(item => item.sectionType === "RTChart")
+  return chart;
+});
 const homeDataSlice = createSlice({
   name: "homeData",
   initialState: {
@@ -60,7 +78,10 @@ const homeDataSlice = createSlice({
     topHundred : [],
     xone:[],
     hAlbum:[],
-    newRelease:[]
+    newRelease:[],
+    weekChart:[],
+    eventSlide:[],
+    chart:[]
   },
   reducers: {},
   extraReducers:(builder) => {
@@ -89,6 +110,15 @@ const homeDataSlice = createSlice({
       })
       .addCase(getNewRelease.fulfilled,(state,action) => {
         state.newRelease = action.payload
+      })
+      .addCase(getWeekChart.fulfilled,(state,action) => {
+        state.weekChart = action.payload
+      })
+      .addCase(getEvent.fulfilled,(state,action) => {
+        state.eventSlide= action.payload
+      })
+      .addCase(getChart.fulfilled,(state,action) => {
+        state.chart = action.payload
       })
   }
 

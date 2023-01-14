@@ -94,7 +94,7 @@ export const SongInfoPlayer = styled.div`
       font-size: 0.8rem;
       color: #333;
       overflow-y: scroll;
-      height: 50px;
+      height: 30px;
     }
     a:hover {
       text-decoration: underline;
@@ -338,28 +338,29 @@ const Player = () => {
   const play = async () => {
    await audioDom.play();
   };
-  useEffect(() =>{
-    if(isPlayAudio) 
-    {
-      audioDom.load()
+  // useEffect(() =>{
+  //   audioDom.pause()
 
-        play();
-        intervalID = setInterval(() => {
-          let percent =
-            Math.round((audioDom.currentTime * 10000) / songData?.duration) / 100;
-          progressRef.current.style.width = percent + "%";
-          setCurrSecond(Math.round(audioDom.currentTime));
-          // console.log(percent)
-        }, 100);
-      }
-     else{
-       audioDom.pause()
-       dispatch(setIsPlayAudio(false))
-    }
-     return () => {
-        intervalID &&  clearInterval(intervalID)
-     }
-  },[isPlayAudio])
+  //   if(isPlayAudio) 
+  //   {
+
+  //       play();
+  //       intervalID = setInterval(() => {
+  //         let percent =
+  //           Math.round((audioDom.currentTime * 10000) / songData?.duration) / 100;
+  //         progressRef.current.style.width = percent + "%";
+  //         setCurrSecond(Math.round(audioDom.currentTime));
+  //         // console.log(percent)
+  //       }, 100);
+  //     }
+  //    else{
+  //      audioDom.pause()
+  //      dispatch(setIsPlayAudio(false))
+  //   }
+  //    return () => {
+  //       intervalID &&  clearInterval(intervalID)
+  //    }
+  // },[isPlayAudio])
   //handle play/
   useEffect(() => {
     intervalID && clearInterval(intervalID);

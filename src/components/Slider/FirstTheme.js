@@ -12,6 +12,7 @@ const ThemeContainer = styled.div`
   display: grid;
     
   } */
+  /* margin-bottom: 1rem; */
 `;
 const ThemeItem = styled.div`
   width: 25%;
@@ -104,8 +105,8 @@ useEffect(() => {
   }
 },[window.innerWidth])
   return (
-    <div className="margin" style={{marginTop:20}}>
-      <h3 style={{ marginBottom: "1rem" }}>Xuân mang Tết đến</h3>
+    <div className="margin" style={{marginTop:30,marginBottom:20}}>
+      <h3 style={{ marginBottom: "1rem",marginTop:48}}>Xuân mang Tết đến</h3>
       <ThemeContainer>
         {dataSection?.map((item, i) => {
           const linkCut = item.link.split(".")[0]

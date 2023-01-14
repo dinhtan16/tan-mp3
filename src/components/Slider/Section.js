@@ -140,7 +140,7 @@ useEffect(() => {
 },[window.innerWidth])
   return (
     <MarginTop>
-      <h3 style={{ marginBottom: "1rem"}}>{title}</h3>
+      <h3 style={{ marginBottom: "1rem",marginTop:48}}>{title}</h3>
       <ThemeContainer>
         {dataSection?.map((item, i) => {
           const linkCut = item.link.split(".")[0]

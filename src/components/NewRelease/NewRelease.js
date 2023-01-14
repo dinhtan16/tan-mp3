@@ -6,6 +6,7 @@ const ListStyle = styled.div`
   display: flex;
   flex-wrap: wrap;
   /* gap: 0.7rem; */
+  margin-top: 10px;
 `;
 const ButtonStyle = styled.div`
   display: flex;

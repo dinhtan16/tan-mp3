@@ -8,7 +8,7 @@ padding: 30px 59px;
 flex-direction: column;
 gap:5rem; */
 @media screen and (max-width:880px) {
-    height: 500px; 
+    height: 480px; 
   }
 /* @media screen and (max-width:880px) {
     height: 918px; 
@@ -17,6 +17,6 @@ gap:5rem; */
     height: 540px;  
   }
   @media screen and (min-height:1024px) {
-    height: calc(1024px - 90px - 60px);
+    height: calc(1240px - 90px - 60px);
   }
 `;
