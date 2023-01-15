@@ -8,14 +8,10 @@ export const getSearchData = createAsyncThunk(
       // console.log(id)
       const res = await getSearch(keyword);
       // console.log(res)
-      if(res?.data.data.counter.song === 0) {
-          console.log('error')
-        }
+    
         return res?.data?.data
     } catch (error) {
-        if(res?.data.err !== 0) {
-            console.log(error)
-        }
+       
       console.log(error);
     }
   }
