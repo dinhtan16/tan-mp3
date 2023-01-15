@@ -152,7 +152,7 @@ const AlbumDetail = () => {
       dispatch(setIsActiveTab(songLists[randomIndex]));
   }
   const handleDisc = () => {
-    dispatch(setCurrSong(currSongID))
+    // dispatch(setCurrSong(currSongID))
     dispatch(setIsPlayAudio(!isPlayAudio))
 
   }
