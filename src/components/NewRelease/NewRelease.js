@@ -34,7 +34,6 @@ const ButtonStyle = styled.div`
 const NewRelease = ({ data, title }) => {
   // console.log(data.all)
   const [dataList, setDataList] = useState(data?.all);
-  const [active, setActive] = useState(true);
   useEffect(() => {
     setDataList(data?.all);
   }, [data]);

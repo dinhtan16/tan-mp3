@@ -153,7 +153,9 @@ const AlbumDetail = () => {
   }
   const handleDisc = () => {
     // dispatch(setCurrSong(currSongID))
+    
     dispatch(setIsPlayAudio(!isPlayAudio))
+  
 
   }
   return (

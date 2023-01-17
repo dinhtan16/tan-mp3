@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { createSearchParams, Outlet, useParams, useSearchParams } from "react-router-dom";
+import { createSearchParams, NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 const SearchPageContainer = styled.div`
@@ -20,8 +20,9 @@ const SearchPageContainer = styled.div`
       text-transform: uppercase;
       /* font-weight: 600; */
       font-size: 0.9rem;
-
-      &.active {
+      display: flex;
+      gap:2rem;
+      a.active {
         color: #844d4d;
         font-weight: bold;
         text-decoration: underline;
@@ -43,50 +44,39 @@ const SearchPage = () => {
   // const data = useParams();
   const keyword = useSelector(state => state.search.keyword)
   // console.log(keyword)
-  var tabs = document.querySelectorAll(".tabs");
-  tabs.forEach(function (tab) {
-    // console.log(button);
-    tab.addEventListener("click", function () {
-      tabs.forEach(function (tab) {
-        tab.classList.remove("active");
-      });
-      tab.classList.add("active");
-    });
-  });
-  const navigate = useNavigate();
-
-  const handleNavigate = () => {
-    navigate({
-      pathname:'/tim-kiem/bai-hat',
-      search:`?${createSearchParams({
-        q: keyword
-    })}`
-    });
-  }
-  const handleNavigateAll = () => {
-    navigate({
-      pathname:'/tim-kiem/tat-ca',
-      search:`?${createSearchParams({
-        q: keyword
-    })}`
-    });
-  }
+  
+  const navLink = [{
+    id:1,
+    name:'Tất cả',
+    path:'/tim-kiem/tat-ca'
+  },
+{
+  id:2,
+  name:'Bài hát',
+  path:'/tim-kiem/bai-hat'
+},{
+  id:3,
+  name:'Playlist/OA',
+  path:'/tim-kiem/playlist'
+}]
   return (
     <SearchPageContainer>
       <div className="top">
         <div className="first">Kết Quả Tìm Kiếm</div>
-        <span
-          className="tabs active"
-          onClick={handleNavigateAll}
-        >
-          tất cả
+        <span>
+          {
+            navLink.map((item) => {
+             return <NavLink key={item.id}  className={({ isActive }) => (isActive ? "active" : "link")}  to={{
+              pathname:item.path,
+              search:`?${createSearchParams({
+                q: keyword
+            })}`
+            } }>
+                {item.name}
+              </NavLink>
+            })
+          }
         </span>
-        <span className="tabs" onClick={handleNavigate}>
-          bài hát
-        </span>
-        <span className="tabs">playlist/album</span>
-        <span className="tabs">nghệ sĩ/OA</span>
-        <span className="tabs">MV</span>
       </div>
       <div>
         <Outlet />

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCurrSong, setIsPlayAudio } from "../../stores/Slices/setIDSlice";
 import { numberFollow } from "../../components/customHook/fnNumber";
+
 const SearchPage = styled.div`
   height: 420px;
   overflow-y: scroll;
@@ -141,6 +142,7 @@ const Playlist = styled.section`
     flex-direction: column;
     .top {
       img {
+     
         width: 100%;
         height: auto;
         object-fit: cover;
@@ -259,13 +261,15 @@ const Artists = styled.div`
     margin-top: 2rem;
     font-weight: 700;
     text-transform: uppercase;
-    margin-bottom: 2rem;
+    margin-bottom: 1.4rem;
   }
   .artists-list {
     display: flex;
     /* gap: 1rem; */
     /* flex-direction: column; */
+    flex-wrap: wrap;
     .artist-item {
+      margin-top: 10px;
       width: 25%;
       display: flex;
       flex-direction: column;
@@ -284,16 +288,18 @@ const Artists = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        min-height: 50px;
+        height: 50px;
         gap: 10px;
 
         .info-name {
           font-size: 1rem;
           font-weight: bold;
+          text-align: center;
         }
         .info-follow {
           font-size: 0.82rem;
           color: grey;
+          height: 30px;
         }
       }
       .item-btn {
@@ -312,13 +318,17 @@ const Artists = styled.div`
 `;
 const SearchAll = () => {
   const searchData = useSelector((state) => state.search.searchData);
-  console.log(searchData)
+  // console.log(searchData)
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSong = (item) => {
     dispatch(setCurrSong(item.encodeId))
     dispatch(setIsPlayAudio(true))
   }
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <SearchPage>
     
@@ -442,7 +452,7 @@ const SearchAll = () => {
                   </div>
                   <div className="bottom">
                     <div className="bottom-left">
-                      <img src={item.artist?.thumbnail} />
+                      <img src={item.artist?.thumbnail} alt='none' />
                     </div>
                     <div className="bottom-right">
                       <span className="title-mv">{item.title}</span>

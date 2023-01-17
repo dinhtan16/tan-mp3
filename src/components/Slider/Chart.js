@@ -1,7 +1,7 @@
 import React, { memo, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Line } from "react-chartjs-2";
-import { Chart, Colors } from "chart.js/auto";
+import { Chart } from "chart.js/auto";
 import { useSelector } from "react-redux";
 import RankItem from "./Chart/RankItem";
 import _  from 'lodash'

@@ -10,6 +10,8 @@ import ZingChartSong from "../Pages/ZingChartSong";
 import SearchPage from "../Pages/Search/SearchPage";
 import SearchAll from "../Pages/Search/SearchAll";
 import SearchSong from "../Pages/Search/SearchSong";
+import SearchAlbum from "../Pages/Search/SearchAlbum";
+import ArtistPageSong from "../Pages/Search/Artist/ArtistPageSong";
 
 function RouteLayout() {
   return (
@@ -22,9 +24,18 @@ function RouteLayout() {
       <Route path="/zing-chart-tuan/:title/:id" element={<ZingChartWeek />} />
       <Route path="/zing-chart-tuan/:title/:id" element={<ZingChartWeek />} />
       <Route path="/zing-chart" element={<ZingChartSong />} />
+      <Route path="/:name/" element={<Artist />}>
+
+      </Route>
+      <Route path="/:name/bai-hat" element={<ArtistPageSong />}/>
+      <Route path="/nghe-si/:name/bai-hat" element={<ArtistPageSong />}/>
+
+      <Route path="/nghe-si/:name" element={<Artist />} />
+
       <Route path="/tim-kiem" element={<SearchPage />} >
           <Route path="tat-ca/" element={<SearchAll />} />
           <Route path="bai-hat/" element={<SearchSong />} />
+          <Route path="playlist/" element={<SearchAlbum />} />
       </Route>
 
 

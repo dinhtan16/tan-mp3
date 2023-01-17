@@ -6,6 +6,7 @@ import SliderComponent from "../components/Slider/Slider";
 
 import {
   getArtistSlide,
+  getArtistSpot,
   getChart,
   getEvent,
   getHAlbum,
@@ -26,6 +27,7 @@ import styled from "styled-components";
 import WeekChart from "../components/Slider/WeekChart";
 import Events from "../components/Slider/Events";
 import Chart from "../components/Slider/Chart";
+import ArtistSlide from "../components/Slider/ArtistSlide";
 
 const SectionStyle = styled.div`
   height: 100%;
@@ -52,7 +54,8 @@ const Home = () => {
     dispatch(getWeekChart());
     dispatch(getEvent());
     dispatch(getChart())
-  }, []);
+    dispatch(getArtistSpot())
+  }, [dispatch]);
 
   const banner = useSelector((state) => state.homeData.banner);
   const theme = useSelector((state) => state.homeData.theme);
@@ -64,6 +67,7 @@ const Home = () => {
   const newRelease = useSelector((state) => state.homeData.newRelease);
   const weekChart = useSelector((state) => state.homeData.weekChart);
   const events = useSelector((state) => state.homeData.eventSlide);
+  const artistSpot = useSelector(state => state.homeData.artistSpot)
   // const charts = useSelector((state) => state.homeData.chart);
 
   // console.log(events.items)
@@ -94,6 +98,8 @@ const Home = () => {
           title={artistSlide?.title}
           className="section-item"
         />
+          <ArtistSlide data={artistSpot?.items} title={artistSpot?.title}/>
+         
         <Section
           data={musicEveryday?.items}
           title={musicEveryday?.title}

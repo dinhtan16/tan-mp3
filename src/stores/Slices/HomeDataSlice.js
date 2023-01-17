@@ -68,6 +68,12 @@ export const getChart = createAsyncThunk("chart/fetch", async () => {
   const chart =items?.find(item => item.sectionType === "RTChart")
   return chart;
 });
+export const getArtistSpot = createAsyncThunk("artistSpot/fetch", async () => {
+  const res = await getHome();
+  const {data:{items}} = res.data
+  const artistSpot =items?.find(item => item.sectionType === "artistSpotlight")
+  return artistSpot;
+});
 const homeDataSlice = createSlice({
   name: "homeData",
   initialState: {
@@ -81,7 +87,8 @@ const homeDataSlice = createSlice({
     newRelease:[],
     weekChart:[],
     eventSlide:[],
-    chart:[]
+    chart:[],
+    artistSpot:[]
   },
   reducers: {},
   extraReducers:(builder) => {
@@ -119,6 +126,9 @@ const homeDataSlice = createSlice({
       })
       .addCase(getChart.fulfilled,(state,action) => {
         state.chart = action.payload
+      })
+      .addCase(getArtistSpot.fulfilled,(state,action) =>  {
+        state.artistSpot = action.payload
       })
   }
 

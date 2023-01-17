@@ -5,6 +5,7 @@ import Header from "../components/Header/Header";
 import Player from "../components/Player/Player";
 import SideBarLeft from "../components/SideBar/SideBarLeft";
 import SideBarRight from "../components/SideBar/SideBarRight";
+import Welcome from "../components/Welcome/Welcome";
 import RouteLayout from "../routes/route";
 import {
   LayoutContainer,
@@ -39,9 +40,20 @@ transform: translateX(100%);
 `;
 const LayoutDefault = () => {
   const isActiveRight = useSelector(state => state.setID.isActiveRight)
+  const [isLoading,setIsLoading] = useState(false)
 
+  useEffect(() => {
+    setIsLoading(true)
+    const res = setTimeout(() =>{
+      setIsLoading(false)
+    } ,3000)
+
+    return () => {
+      clearTimeout(res)
+    }
+  },[])
   return (
-    <DefaultLayout>
+  isLoading ? <Welcome /> :  <DefaultLayout>
       <LayoutContainer>
         <LeftSidebarStyle>
           <SideBarLeft />

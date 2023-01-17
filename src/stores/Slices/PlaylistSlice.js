@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getArtistSong } from "../../api/getArtistSongAPI";
 import { getDetailPlaylist } from "../../api/getDetailPlaylistAPI";
 export const getPlaylistData = createAsyncThunk(
   "playlist/fetch",
@@ -15,16 +16,40 @@ export const getPlaylistData = createAsyncThunk(
     }
   }
 );
+export const getSongFromPlayList = createAsyncThunk(
+  "playlist-songSearch/fetch",
+  async (data) => {
+    const {id} = data
+    try {
+      // console.log(id)
+      const res = await getArtistSong(id);
+      if(res?.data.err === 0 ){
+        return res?.data?.data
+      }
+      else{
+        return
+      }
+      // console.log(res.data?.data);
+      // return res.data.data.song?.items;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 const playlistSlice = createSlice({
   name: "playlist",
   initialState: {
     songData: [],
+    songSearchData:[]
   },
   reducers: {},
   extraReducers: (builder) => {
 
     builder.addCase(getPlaylistData.fulfilled, (state, action) => {
       state.songData = action.payload;
+    });
+    builder.addCase(getSongFromPlayList.fulfilled, (state, action) => {
+      state.songSearchData = action.payload;
     });
   },
 });

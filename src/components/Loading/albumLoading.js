@@ -1,10 +1,10 @@
 import React, { memo } from 'react'
 import "./loading.css";
 
-const albumLoading = () => {
+const AlbumLoading = () => {
   return (
     <div className='load-container'><span className="loader"></span></div>
   )
 }
 
-export default memo(albumLoading)
+export default memo(AlbumLoading)

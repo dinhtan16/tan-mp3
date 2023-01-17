@@ -11,9 +11,12 @@ function App() {
     window.addEventListener('resize',() => {
         setsize(window.innerWidth)
     })
-    return window.removeEventListener('resize',() =>{
+    
+    return () => {
+      
+      window.removeEventListener('resize',() =>{
       setsize(0)
-    })
+    })} 
   },[])
   
   return(
@@ -22,7 +25,7 @@ function App() {
     ) : (
       <>
       <LayoutDefault />
-   <ToastContainer />
+     <ToastContainer />
    </>
     )
   );

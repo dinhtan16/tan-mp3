@@ -7,14 +7,14 @@ import { getAudioApi } from "../../api/getAudioApi";
 import format from "format-duration";
 
 import { FaRandom } from "react-icons/fa";
-import { TbPlaylist, TbPlaylistX, TbRepeat, TbRepeatOnce } from "react-icons/tb";
+import { TbPlaylist,  TbRepeat, TbRepeatOnce } from "react-icons/tb";
 import { FiMoreHorizontal } from "react-icons/fi";
 import{HiOutlinePause} from 'react-icons/hi2'
 import { CiHeart } from "react-icons/ci";
 
 
 import {
-  IoPlayCircleOutline,
+  
   IoPlaySkipBackCircleOutline,
   IoPlaySkipForwardCircleOutline,
   IoVolumeMediumOutline
@@ -259,7 +259,7 @@ const Player = () => {
   const songLists = useSelector((state) => state.playlist.songData);
   const isActiveRight = useSelector(state => state.setID.isActiveRight)
   //state
-  const [audioDom, setAudioDom] = useState(new Audio());
+  const [audioDom] = useState(new Audio());
   const [songData, setSongData] = useState([]);
   const [album, setAlbum] = useState([]);
   const [artist, setArtist] = useState([]);
@@ -271,7 +271,6 @@ const Player = () => {
 //volume state
   const [volume,setVolume] = useState(70)
   //mute state
-  const [isMute,setIsMute] = useState(false)
 
   //toggle controls state
   const [isShuffle, setIsShuffle] = useState(false);
@@ -293,11 +292,11 @@ const Player = () => {
       const res = await getSongInfo(songID);
       setIsLoadingSong(false)
       setSongData(res?.data?.data);
-      const albumLink = res.data.data.album?.link;
+      const albumLink = res?.data?.data?.album?.link;
       const albumCutLink = albumLink?.split(".")[0];
       setAlbum(albumCutLink);
-      const artist = res.data.data.artists;
-      const artistName = res.data.data.artistsNames;
+      const artist = res?.data?.data?.artists;
+      const artistName = res?.data?.data?.artistsNames;
       setArtistName(artistName);
       setArtist(artist);
     };
