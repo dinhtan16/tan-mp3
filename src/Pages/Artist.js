@@ -34,6 +34,18 @@ const ArtistTop = styled.section`
     width: 100%;
     min-height: 200px;
   }
+  .overlay {
+      /* z-index: 1; */
+      border-radius: 10px;
+
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(
+        180deg,
+        transparent 27%,
+        rgba(0, 0, 0, 0.78)
+      );
+    }
   .top-info {
     width: 100%;
     padding: 10px 59px;
@@ -52,7 +64,7 @@ const ArtistTop = styled.section`
       gap: 1rem;
       .name {
         font-size: 3em;
-        background-color: rgba(0, 0, 0, 0.17);
+        /* background-color: rgba(0, 0, 0, 0.17); */
         width: fit-content;
         font-weight: bold;
         flex-shrink: 0;
@@ -65,7 +77,7 @@ const ArtistTop = styled.section`
         align-items: center;
         gap: 2rem;
         .follow-text {
-          background-color: rgba(0, 0, 0, 0.3);
+          /* background-color: rgba(0, 0, 0, 0.3); */
           /* width: fit-content; */
           min-width: 50px;
         }
@@ -77,7 +89,7 @@ const ArtistTop = styled.section`
           cursor: pointer;
           padding: 5px 20px;
           border-radius: 999px;
-          background-color: rgba(0, 0, 0, 0.4);
+          background-color: rgba(0, 0, 0, 0.2);
           outline: none;
           border: 1px solid #fff;
           color: #fff;
@@ -858,6 +870,7 @@ const Artist = () => {
           alt="loading"
           loading="lazy"
         />
+        <div className="overlay"></div>
         <div className="top-info">
           <div className="top-info-left">
             <div className="name">{artistData?.name}</div>

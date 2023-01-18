@@ -18,7 +18,7 @@ const Artists = styled.div`
     flex-wrap: wrap;
     .artist-item {
       margin-top: 20px;
-      width: 25%;
+      width: 150px;
       display: flex;
       flex-direction: column;
       align-items: center;

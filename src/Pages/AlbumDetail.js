@@ -231,6 +231,7 @@ const AlbumDetail = () => {
                         isActive?.encodeId == item.encodeId ? "song-main active" : "song-main"
                       } `}
                     >
+                      
                       <div className="icon">
                         <CiMusicNote1 />
                       </div>

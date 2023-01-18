@@ -7,6 +7,7 @@ import { store,persistor } from "./stores/store";
 import { BrowserRouter } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 const root = ReactDOM.createRoot(document.getElementById("root"));
+document.title='TanMp3'
 root.render(
   <React.StrictMode>
     <Provider store={store}>

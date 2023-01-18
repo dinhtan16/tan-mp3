@@ -6,14 +6,18 @@ import { useSelector } from "react-redux";
 import RankItem from "./Chart/RankItem";
 import _  from 'lodash'
 import RankItemChart from "./Chart/RankItemChart";
-const Chartcontainer = styled.div`
+const ChartContainer = styled.div.attrs(() => ({
+  className:'container'
+}))`
   display: flex;
   z-index: 90;
   margin-top: 10px;
   position: relative;
   align-items: center;
   gap: 10px;
-
+  &.dblock{
+    display: block;
+  }
   @media screen and (max-width: 964px) {
     flex-direction: column;
     align-items: center;
@@ -27,6 +31,7 @@ const Chartcontainer = styled.div`
     @media screen and (max-width: 964px) {
       width: 100%;
     }
+    
     .rank-list {
       display: flex;
       flex-direction: column;
@@ -49,10 +54,16 @@ const Chartcontainer = styled.div`
       }
     }
   }
+  .rank-list.disable{
+    display: none;
+  }
   .charts {
     width: 60%;
     height: 40vh;
     position: relative;
+  }
+  .charts.fullw{
+    width: 100%;
   }
 `;
 const Container = styled.div`
@@ -71,6 +82,23 @@ const Container = styled.div`
     bottom: 0;
     left: 0;
   }
+  .alpha.yellow{
+    background-image: linear-gradient(180deg, #e5e3df, #e5e3df);
+    opacity: 0.6;
+    border-radius: 0px;
+  }
+  .alpha-1{
+    
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 ;
+    z-index: 0;
+    background-image: linear-gradient(180deg,hsla(0,0%,100%,0) 37%,#d99e28);
+  }
   .bg-blur {
     background: url(https://zjs.zmdcdn.me/zmp3-desktop/releases/v1.8.24/static/media/bg-chart.fd766403.jpg)
       top/cover no-repeat;
@@ -82,13 +110,20 @@ const Container = styled.div`
 
     left: 0;
   }
+  .bg-blur.yellow{
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+    border-radius:0px;
+
+  }
 `;
 const SectionChart = styled.div`
   position: relative;
   z-index: 90;
   color: white;
 `;
-const ChartHome = () => {
+const ChartHome = ({disableItem}) => {
+  // console.log(disableItem)
   const dataChart = useSelector((state) => state.homeData.chart);
   const chart = dataChart?.chart;
   const rank = dataChart?.items;
@@ -101,6 +136,7 @@ const ChartHome = () => {
     top: 0,
     left: 0,
     opacity: 0,
+    display:'none'
   });
   // console.log(data)
   // console.log(chart.chart.items)
@@ -131,13 +167,14 @@ const ChartHome = () => {
 //   console.log(rank)
   return (
     <Container>
-      <div className="alpha"></div>
-      <div className="bg-blur"></div>
+      <div className={disableItem ? "alpha yellow" : "alpha"}></div>
+      <div className={disableItem ? "bg-blur yellow" : "bg-blur"}></div>
+      <div className={disableItem && "alpha-1"}></div>
       <SectionChart>
         <div style={{ fontWeight: 700, fontSize: "1.4rem" }}>#zingchart</div>
-        <Chartcontainer>
+        <ChartContainer className={disableItem ? "container dblock"  : "container"}>
           <div className="ranking">
-            <div className="rank-list">
+            <div className={disableItem ? "rank-list disable" : "rank-list"}>
               <div>
                 {dataCut?.map((item, i) => {
                   return (
@@ -155,7 +192,7 @@ const ChartHome = () => {
               <button>Xem thêm</button>
             </div>
           </div>
-          <div className="charts">
+          <div className={disableItem ? "charts fullw" : "charts"}>
             {data && (
               <Line
                 ref={chartRef}
@@ -193,7 +230,7 @@ const ChartHome = () => {
                         if (!chartRef || !chartRef.current) return
                         if (tooltipModel.opacity === 0) {
                           if (tooltipState.opacity !== 0)
-                            setTooltipState((prev) => ({ ...prev, opacity: 0 }));
+                            setTooltipState((prev) => ({ ...prev, opacity: 0 ,display:'none'}));
                           return;
                         }
                         //push array counter và id để so sánh giá trị trong tooltip
@@ -219,7 +256,7 @@ const ChartHome = () => {
                             top: tooltipModel.caretY,
                             left:tooltipModel.caretX,
                             opacity: 1,
-                          
+                            display:'block'
                         }
                         if (!_.isEqual(tooltipState, newTooltipData)){
                             setTooltipState(newTooltipData);
@@ -242,6 +279,7 @@ const ChartHome = () => {
                 top:tooltipState.top, 
                 left: tooltipState.left, 
                 opacity: tooltipState.opacity,
+                display:tooltipState.display,
                 position:'absolute' }}>
                     <RankItemChart
                      
@@ -253,7 +291,7 @@ const ChartHome = () => {
 
             </div>
           </div>
-        </Chartcontainer>
+        </ChartContainer>
       </SectionChart>
     </Container>
   );

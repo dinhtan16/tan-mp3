@@ -21,6 +21,7 @@ function RouteLayout() {
       <Route path="/profile" element={<Proflie />} />
       <Route path="/playlist/:title/:id" element={<AlbumDetail />} />
       <Route path="/album/:title/:id" element={<AlbumDetail />} />
+      <Route path="/bai-hat/:title/:id" element={<AlbumDetail />} />
       <Route path="/zing-chart-tuan/:title/:id" element={<ZingChartWeek />} />
       <Route path="/zing-chart-tuan/:title/:id" element={<ZingChartWeek />} />
       <Route path="/zing-chart" element={<ZingChartSong />} />
