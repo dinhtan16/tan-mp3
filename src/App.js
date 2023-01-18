@@ -5,20 +5,45 @@ import {ToastContainer} from 'react-toastify'
 import { useEffect,  useState } from "react";
 import Sorry from "./components/HandleDetect/Sorry";
 import Welcome from "./components/Welcome/Welcome";
-function App() {
-  const [size,setSize] =useState(700)
+
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
+
+export  function useWindowDimensions() {
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
+
   useEffect(() => {
-    // console.log(window.innerWidth)
-    window.addEventListener('load',() => {
-        setSize(window.innerWidth)
-    })
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowDimensions;
+}
+function App() {
+  const { height, width } = useWindowDimensions();
+  // useEffect(() => {
+  //   // console.log(window.innerWidth)
+  //   window.addEventListener('load',() => {
+  //       setSize(window.innerWidth)
+  //   })
     
-    return () => {
+  //   return () => {
       
-      window.removeEventListener('load',() =>{
-      setSize(0)
-    })} 
-  },[])
+  //     window.removeEventListener('load',() =>{
+  //     setSize(0)
+  //   })} 
+  // },[size])
   // const [isLoading,setIsLoading] = useState(false)
   // useEffect(() => {
   //    setIsLoading(true)
@@ -32,7 +57,7 @@ function App() {
   //  },[])
  
   return(
-   size < 700 ? (
+    width < 700 ? (
     <Sorry />
     ) : (
       <>

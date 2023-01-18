@@ -20,6 +20,12 @@ const ArtistPage = styled.div`
   height: 500px;
   overflow-y: scroll;
   overflow-x: hidden;
+  @media screen and (min-height:1124px) {
+    height: 968px;
+  }
+  @media screen and (max-height:500px) {
+    height: 210px;
+  }
 `;
 const ArtistTop = styled.section`
   position: relative;

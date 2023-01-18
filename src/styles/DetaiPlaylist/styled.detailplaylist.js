@@ -6,6 +6,13 @@ export const DetailPlaylistContainer = styled.div`
   padding-top: 2rem;
   /* max-height:calc(3/2); */
   max-height: 548px;
+
+  @media screen and (min-height:1124px) {
+    height: 968px;
+  }
+  @media screen and (max-height:500px) {
+    height: 210px;
+  }
   /* height: 100%; */
   overflow-y: scroll;
   ::-webkit-scrollbar {

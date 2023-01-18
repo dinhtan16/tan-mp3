@@ -11,6 +11,12 @@ import { numberFollow } from "../../components/customHook/fnNumber";
 const SearchPage = styled.div`
   height: 420px;
   overflow-y: scroll;
+  @media screen and (min-height:1124px) {
+    height: 905px;
+  }
+  @media screen and (max-height:500px) {
+    height: 210px;
+  }
 `;
 const Highlight = styled.section`
   .title {
