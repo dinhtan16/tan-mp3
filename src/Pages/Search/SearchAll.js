@@ -58,6 +58,10 @@ const Highlight = styled.section`
         font-weight: bold;
         cursor: pointer;
         margin-top: 5px;
+        &:hover{
+          color:#af8f8e;
+          
+        }
       }
       .artist {
         /* font-weight: light; */
@@ -65,6 +69,10 @@ const Highlight = styled.section`
         color: grey;
         cursor: pointer;
         margin-top: 5px;
+        a:hover{
+              text-decoration: underline;
+              color:#af8f8e;
+            }
       }
     }
   }
@@ -110,11 +118,19 @@ const Song = styled.section`
             /**Major Properties**/
             font-size: 0.8rem;
             font-weight: bold;
+            &:hover{
+              color:#af8f8e;
+
+            }
           }
           .artist {
             font-size: 0.7rem;
             color: grey;
             margin-top: 5px;
+            a:hover{
+              text-decoration: underline;
+              color:#af8f8e;
+            }
           }
         }
       }
@@ -164,6 +180,10 @@ const Playlist = styled.section`
         text-overflow: ellipsis;
         -webkit-line-clamp: 1;
         font-weight: bold;
+        &:hover{
+          color:#af8f8e;
+
+        }
       }
       .artists-title {
         font-size: 0.9rem;
@@ -176,6 +196,10 @@ const Playlist = styled.section`
         overflow: hidden !important;
         text-overflow: ellipsis;
         -webkit-line-clamp: 1;
+        a:hover{
+              text-decoration: underline;
+              color:#af8f8e;
+            }
       }
     }
   }
@@ -236,6 +260,10 @@ const MusicVideo = styled.section`
             overflow: hidden !important;
             text-overflow: ellipsis;
             -webkit-line-clamp: 1;
+            &:hover{
+              color:#af8f8e;
+
+            }
           }
           .artists-mv {
             font-size: 0.8rem;
@@ -249,6 +277,10 @@ const MusicVideo = styled.section`
             overflow: hidden !important;
             text-overflow: ellipsis;
             -webkit-line-clamp: 1;
+            a:hover{
+              text-decoration: underline;
+              color:#af8f8e;
+            }
           }
         }
       }

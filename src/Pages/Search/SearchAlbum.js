@@ -50,6 +50,10 @@ const Playlist = styled.section`
         text-overflow: ellipsis;
         -webkit-line-clamp: 1;
         font-weight: bold;
+        &:hover{
+          color:#af8f8e;
+
+        }
       }
       .artists-title {
         font-size: 0.8rem;
@@ -63,6 +67,11 @@ const Playlist = styled.section`
         overflow: hidden !important;
         text-overflow: ellipsis;
         -webkit-line-clamp: 1;
+        a:hover{
+          text-decoration: underline;
+          color:#af8f8e;
+          
+        }
       }
     }
   }

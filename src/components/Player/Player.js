@@ -337,29 +337,29 @@ const Player = () => {
   const play = async () => {
    await audioDom.play();
   };
-  useEffect(() =>{
-    audioDom.pause()
+  // useEffect(() =>{
+  //   audioDom.pause()
 
-    if(isPlayAudio) 
-    {
+  //   if(isPlayAudio) 
+  //   {
 
-        play();
-        intervalID = setInterval(() => {
-          let percent =
-            Math.round((audioDom.currentTime * 10000) / songData?.duration) / 100;
-          progressRef.current.style.width = percent + "%";
-          setCurrSecond(Math.round(audioDom.currentTime));
-          // console.log(percent)
-        }, 100);
-      }
-     else{
-       audioDom.pause()
-       dispatch(setIsPlayAudio(false))
-    }
-     return () => {
-        intervalID &&  clearInterval(intervalID)
-     }
-  },[isPlayAudio])
+  //       play();
+  //       intervalID = setInterval(() => {
+  //         let percent =
+  //           Math.round((audioDom.currentTime * 10000) / songData?.duration) / 100;
+  //         progressRef.current.style.width = percent + "%";
+  //         setCurrSecond(Math.round(audioDom.currentTime));
+  //         // console.log(percent)
+  //       }, 100);
+  //     }
+  //    else{
+  //      audioDom.pause()
+  //      dispatch(setIsPlayAudio(false))
+  //   }
+  //    return () => {
+  //       intervalID &&  clearInterval(intervalID)
+  //    }
+  // },[isPlayAudio])
   //handle play/
   useEffect(() => {
     intervalID && clearInterval(intervalID);

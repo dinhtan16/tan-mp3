@@ -26,7 +26,7 @@ const menus = [
   },
   {
     name: "#zingchart",
-    link: "chart",
+    link: "zing-chart",
     icon: <BiNetworkChart />,
   },
   {
@@ -34,41 +34,7 @@ const menus = [
     link: "radio",
     icon: <MdRadio />,
   },
-  {
-    name: "Radio",
-    link: "radio",
-    icon: <MdRadio />,
-  },
-  {
-    name: "Radio",
-    link: "radio",
-    icon: <MdRadio />,
-  },
-  {
-    name: "Radio",
-    link: "radio",
-    icon: <MdRadio />,
-  },
-  {
-    name: "Radio",
-    link: "radio",
-    icon: <MdRadio />,
-  },
-  {
-    name: "Radio",
-    link: "radio",
-    icon: <MdRadio />,
-  },
-  {
-    name: "Radio",
-    link: "radio",
-    icon: <MdRadio />,
-  },
-  {
-    name: "Radio",
-    link: "radio",
-    icon: <MdRadio />,
-  },
+  
 
 ];
 const SideBar = () => {

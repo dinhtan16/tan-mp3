@@ -43,19 +43,22 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
+  
     dispatch(getHomeData());
-    dispatch(getTheme1Data());
-    dispatch(getArtistSlide());
+     dispatch(getTheme1Data());
+      dispatch(getArtistSlide());
     dispatch(getNewMusicEveryDay());
-    dispatch(getTopHundred());
-    dispatch(getHXone());
-    dispatch(getHAlbum());
-    dispatch(getNewRelease());
-    dispatch(getWeekChart());
-    dispatch(getEvent());
-    dispatch(getChart())
-    dispatch(getArtistSpot())
-  }, [dispatch]);
+      dispatch(getTopHundred());
+   dispatch(getHXone());
+     dispatch(getHAlbum());
+     dispatch(getNewRelease());
+   dispatch(getWeekChart());
+   dispatch(getEvent());
+      dispatch(getChart())
+      dispatch(getArtistSpot())
+    
+  
+  }, []);
 
   const banner = useSelector((state) => state.homeData.banner);
   const theme = useSelector((state) => state.homeData.theme);

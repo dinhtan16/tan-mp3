@@ -6,104 +6,183 @@ import Tippy from "@tippyjs/react";
 
 import styled from "styled-components";
 import { getArtistPage } from "../stores/Slices/ArtistSlice";
-import zingAward from '../assets/svg/svgexport-15.jpg'
-import award from '../assets/svg/svgexport-16.jpg'
+import zingAward from "../assets/svg/svgexport-15.jpg";
+import award from "../assets/svg/svgexport-16.jpg";
 import format from "format-duration";
 
 import { numberFollow } from "../components/customHook/fnNumber";
-import {IoCloseOutline} from 'react-icons/io5'
+import { IoCloseOutline } from "react-icons/io5";
 
-import AlbumLoading from '../components/Loading/albumLoading'
-import {setCurrSong, setIsPlayAudio} from '../stores/Slices/setIDSlice'
+import AlbumLoading from "../components/Loading/albumLoading";
+import { setCurrSong, setIsPlayAudio } from "../stores/Slices/setIDSlice";
 
 const ArtistPage = styled.div`
-height: 500px;
-overflow-y: scroll;
-overflow-x: hidden;
+  height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 const ArtistTop = styled.section`
-position: relative;
+  position: relative;
+  width: 100%;
+  .img-cover {
     width: 100%;
-    .img-cover{
-      width: 100%;
-    }
-    .top-info{
-      width: 100%;
-      padding: 10px 59px;
-      position: absolute;
-      bottom: 20px;
-      left: 20px;
+    min-height: 200px;
+  }
+  .top-info {
+    width: 100%;
+    padding: 10px 59px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    flex-wrap: wrap;
+    color: white;
+    .top-info-left {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      color: white;
-      .top-info-left{
+      flex-direction: column;
+      gap: 1rem;
+      .name {
+        font-size: 3em;
+        background-color: rgba(0, 0, 0, 0.17);
+        width: fit-content;
+        font-weight: bold;
+        flex-shrink: 0;
+      }
+      .follow {
+        font-size: 0.9rem;
+        color: #fff;
+
         display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        .name{
-          font-size: 4rem;
-          background-color: rgba(0,0,0,0.17);
-          width: fit-content;
-          font-weight: bold;
+        align-items: center;
+        gap: 2rem;
+        .follow-text {
+          background-color: rgba(0, 0, 0, 0.3);
+          /* width: fit-content; */
+          min-width: 50px;
         }
-        .follow{
-          font-size: 0.9rem;
-          color:#fff;
-        
-
-          display: flex;
-          align-items: center;
-          gap: 2rem;
-          .follow-text{
-            background-color: rgba(0,0,0,0.3);
-            /* width: fit-content; */
-            min-width: 50px;
-
-          }
-          .care{
-            /* background-color: rgba(0,0,0,0.2); */
+        .care {
+          /* background-color: rgba(0,0,0,0.2); */
           width: fit-content;
-          }
-          button{
-            cursor: pointer;
-            padding: 5px 20px;
-            border-radius: 999px;
-            background-color: rgba(0,0,0,0.4);
-            outline: none;
-            border: 1px solid #fff;
-            color: #fff;
-            /* font-weight: bold; */
-          }
+        }
+        button {
+          cursor: pointer;
+          padding: 5px 20px;
+          border-radius: 999px;
+          background-color: rgba(0, 0, 0, 0.4);
+          outline: none;
+          border: 1px solid #fff;
+          color: #fff;
+          /* font-weight: bold; */
         }
       }
-      .top-info-right{
+    }
+    .top-info-right {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+  }
+`;
+const ArtistContent = styled.section`
+  padding: 0 59px;
+`;
+
+const SpotMusic = styled.section`
+  margin-top: 30px;
+
+  .spot-info {
+    @media screen and (max-width: 1124px) {
+      flex-direction: column;
+      .spot-left {
+        width: 100% !important;
+      }
+      .song-lists {
+        width: 100%;
+      }
+    }
+    display: flex;
+    /* align-items: flex-end; */
+    gap: 1rem;
+    .spot-left {
+      display: flex;
+      flex-direction: column;
+      width: 40%;
+      .title-album-hot {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 20px 0;
+      }
+    }
+    .spot-right {
+      flex: 1;
+      .title-spot {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 20px 0;
         display: flex;
-        gap:1rem;
+        justify-content: space-between;
         align-items: center;
       }
     }
-`;
-const ArtistContent = styled.section`
-        padding: 0 59px;
-      `;
-
-const SpotMusic = styled.section`
-margin-top: 30px;
-.title-spot{
-  font-weight: bold;
-  font-size: 1.3rem;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  span{
-    font-weight: light;
   }
-}
-.song-lists {
+  .album-spot {
+    /* padding: 0 20px; */
+    width: 100%;
+    height: fit-content;
+    background-color: #d7d6cf;
+    border-radius: 20px;
+    .album-item {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      gap: 1rem;
+      .left {
+        width: 35%;
+
+        img {
+          display: block;
+          width: 100%;
+          object-fit: cover;
+          border-radius: 8px;
+        }
+      }
+      .right {
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        .type-album {
+          font-size: 0.8rem;
+          color: grey;
+        }
+        .title-album {
+          font-weight: bold;
+          font-size: 1rem;
+          &:hover {
+            color: #af8f8e;
+          }
+        }
+        .artists-album {
+          font-size: 0.8rem;
+          color: grey;
+          a:hover {
+            text-decoration: underline;
+            color: #af8f8e;
+          }
+        }
+        .date {
+          font-size: 0.8rem;
+          color: grey;
+        }
+      }
+    }
+  }
+
+  .song-lists {
+    width: 100%;
     display: flex;
     /* gap: 10px; */
     flex-wrap: wrap;
@@ -145,11 +224,19 @@ margin-top: 30px;
             text-overflow: ellipsis;
             -webkit-line-clamp: 1;
             width: 70%;
+
+            &:hover {
+              color: #af8f8e;
+            }
           }
           .artist {
             font-size: 0.7rem;
             color: grey;
             margin-top: 5px;
+            a:hover {
+              text-decoration: underline;
+              color: #af8f8e;
+            }
           }
         }
       }
@@ -158,8 +245,9 @@ margin-top: 30px;
         color: grey;
       }
     }
-  }`
-  const Playlist = styled.section`
+  }
+`;
+const Playlist = styled.section`
   .playlist-title {
     font-size: 1.2rem;
     margin-bottom: 20px;
@@ -177,7 +265,6 @@ margin-top: 30px;
     flex-direction: column;
     .top {
       img {
-     
         width: 100%;
         height: auto;
         object-fit: cover;
@@ -188,7 +275,7 @@ margin-top: 30px;
       flex-direction: column;
       cursor: pointer;
       .title-playlist {
-        &:hover{
+        &:hover {
           color: #646464;
         }
         max-width: 90%;
@@ -214,12 +301,17 @@ margin-top: 30px;
         overflow: hidden !important;
         text-overflow: ellipsis;
         -webkit-line-clamp: 1;
+
+        a:hover {
+          text-decoration: underline;
+          color: #af8f8e;
+        }
       }
     }
   }
 `;
 const AlbumList = styled.div`
-.playlist-title {
+  .playlist-title {
     font-size: 1.2rem;
     margin-bottom: 20px;
     margin-top: 2rem;
@@ -236,7 +328,6 @@ const AlbumList = styled.div`
     flex-direction: column;
     .top {
       img {
-     
         width: 100%;
         height: auto;
         object-fit: cover;
@@ -247,7 +338,7 @@ const AlbumList = styled.div`
       flex-direction: column;
       cursor: pointer;
       .title-playlist {
-        &:hover{
+        &:hover {
           color: #646464;
         }
         max-width: 90%;
@@ -273,10 +364,14 @@ const AlbumList = styled.div`
         overflow: hidden !important;
         text-overflow: ellipsis;
         -webkit-line-clamp: 1;
+        a:hover {
+          text-decoration: underline;
+          color: #af8f8e;
+        }
       }
     }
   }
-`
+`;
 const MusicVideo = styled.section`
   .mv-title {
     font-size: 1.2rem;
@@ -334,6 +429,10 @@ const MusicVideo = styled.section`
             overflow: hidden !important;
             text-overflow: ellipsis;
             -webkit-line-clamp: 1;
+
+            &:hover {
+              color: #af8f8e;
+            }
           }
           .artists-mv {
             font-size: 0.8rem;
@@ -347,6 +446,10 @@ const MusicVideo = styled.section`
             overflow: hidden !important;
             text-overflow: ellipsis;
             -webkit-line-clamp: 1;
+            a:hover {
+              text-decoration: underline;
+              color: #af8f8e;
+            }
           }
         }
       }
@@ -354,7 +457,7 @@ const MusicVideo = styled.section`
   }
 `;
 const ComboList = styled.section`
-.playlist-title {
+  .playlist-title {
     font-size: 1.2rem;
     margin-bottom: 20px;
     margin-top: 2rem;
@@ -371,7 +474,6 @@ const ComboList = styled.section`
     flex-direction: column;
     .top {
       img {
-     
         width: 100%;
         height: auto;
         object-fit: cover;
@@ -382,7 +484,7 @@ const ComboList = styled.section`
       flex-direction: column;
       cursor: pointer;
       .title-playlist {
-        &:hover{
+        &:hover {
           color: #646464;
         }
         max-width: 90%;
@@ -408,12 +510,17 @@ const ComboList = styled.section`
         overflow: hidden !important;
         text-overflow: ellipsis;
         -webkit-line-clamp: 1;
+
+        a:hover {
+          text-decoration: underline;
+          color: #af8f8e;
+        }
       }
     }
   }
-`
+`;
 const Familiar = styled.section`
-.playlist-title {
+  .playlist-title {
     font-size: 1.2rem;
     margin-bottom: 20px;
     margin-top: 2rem;
@@ -430,7 +537,6 @@ const Familiar = styled.section`
     flex-direction: column;
     .top {
       img {
-     
         width: 100%;
         height: auto;
         object-fit: cover;
@@ -441,7 +547,7 @@ const Familiar = styled.section`
       flex-direction: column;
       cursor: pointer;
       .title-playlist {
-        &:hover{
+        &:hover {
           color: #646464;
         }
         max-width: 90%;
@@ -467,10 +573,15 @@ const Familiar = styled.section`
         overflow: hidden !important;
         text-overflow: ellipsis;
         -webkit-line-clamp: 1;
+
+        a:hover {
+          text-decoration: underline;
+          color: #af8f8e;
+        }
       }
     }
   }
-`
+`;
 const YouLike = styled.div`
   .artist-title {
     font-size: 1.2rem;
@@ -485,19 +596,23 @@ const YouLike = styled.div`
     flex-wrap: wrap;
     .artist-item {
       margin-top: 20px;
-      width: 18%;
+      width: 150px;
+
+      @media screen and (max-width: 866px) {
+        /* max-width: 29%; */
+      }
       display: flex;
       flex-direction: column;
       align-items: center;
       img {
-            overflow: hidden;
-            transition: all .3s ease;
+        overflow: hidden;
+        transition: all 0.3s ease;
 
-          border-radius: 50%;
-          width: 100%;
-          /* height: auto; */
-          object-fit: cover;
-        }
+        border-radius: 50%;
+        width: 100%;
+        /* height: auto; */
+        object-fit: cover;
+      }
       /* .item-img {
           width: 25%;
           border-radius: 50%;
@@ -509,86 +624,91 @@ const YouLike = styled.div`
         &:hover{
             transform: scale(1);
         } */
-      
-      }
-      .item-info {
-        margin-top: 10px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 50px;
-        gap: 10px;
+    }
+    .item-info {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 50px;
+      gap: 10px;
 
-        .info-name {
-          font-size: 1rem;
-          font-weight: bold;
-          text-align: center;
-          &:hover{
-            color:#644646;
-          }
-        }
-        .info-follow {
-          font-size: 0.82rem;
-          color: grey;
-          height: 30px;
+      .info-name {
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: center;
+        &:hover {
+          color: #644646;
         }
       }
-      .item-btn {
-        margin-top: 10px;
-        padding: 8px 20px;
-        border-radius: 999px;
-        outline: none;
-        border: none;
-        text-transform: uppercase;
-        background-color: #644646;
-        color: #fff;
-        /* height: 50px; */
+      .info-follow {
+        font-size: 0.82rem;
+        color: grey;
+        height: 30px;
       }
     }
-  
+    .item-btn {
+      margin-top: 10px;
+      padding: 8px 20px;
+      border-radius: 999px;
+      outline: none;
+      border: none;
+      text-transform: uppercase;
+      background-color: #644646;
+      color: #fff;
+      /* height: 50px; */
+    }
+  }
 `;
-const About= styled.section`
-.about-title{
-  font-weight: 700;
-  margin-top: 2rem;
-  font-size: 1.4rem;
-}
-.about-info{
-  margin-top: 20px;
-display: flex;
-gap: 1rem;
-.info-img{
-  width: 40%;
-    img{
+const About = styled.section`
+  .about-title {
+    font-weight: 700;
+    margin-top: 2rem;
+    font-size: 1.4rem;
+  }
+  .about-info {
+    margin-top: 20px;
+    display: flex;
+    gap: 1rem;
+    @media screen and (max-width: 1124px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  .info-img {
+    width: 40%;
+    img {
       width: 100%;
       object-fit: cover;
       max-height: 320px;
       border-radius: 10px;
     }
-}
-  .info{
-    flex:1;
-    .description{
-
-      .bio{
+  }
+  .info {
+    width: 50%;
+    @media screen and (max-width: 1124px) {
+      width: 100%;
+    }
+    .description {
+      .bio {
         line-height: 1.8;
         color: #828281;
         font-size: 0.9rem;
       }
-      .overlay{
+      .overlay {
         position: fixed;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
-        background-color: rgba(0,0,0,0.3);
+        background-color: rgba(0, 0, 0, 0.3);
         z-index: 999;
         display: none;
       }
-      .overlay.active{
+      .overlay.active {
         display: block;
       }
-      .zm-modal{
+      .zm-modal {
         position: fixed;
         top: 50%;
         left: 50%;
@@ -602,11 +722,10 @@ gap: 1rem;
         /* &:active{
           display: block;
         } */
-        .modal.active{
+        .modal.active {
           display: block;
-
         }
-        .modal{
+        .modal {
           position: fixed;
           background: rgba(255, 255, 255, 0.8);
           border-radius: 16px;
@@ -616,28 +735,27 @@ gap: 1rem;
           border: 1px solid rgba(255, 255, 255, 0.34);
           max-width: 500px;
           display: none;
-         
-          .modal-content{
+
+          .modal-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
-            img{
+            img {
               margin-top: 20px;
               width: 30%;
               border-radius: 999px;
-
             }
-            .bio-full{
+            .bio-full {
               margin-top: 20px;
               width: 60%;
               text-align: justify;
               line-height: 1.5;
               overflow-y: scroll;
               height: 250px;
-              color:#999898;
+              color: #999898;
             }
-            .close{
+            .close {
               position: absolute;
               top: 20px;
               right: 30px;
@@ -646,115 +764,206 @@ gap: 1rem;
           }
         }
       }
-
     }
-  
+    .award-artist {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      margin-top: 30px;
+      .follow-award {
+        font-weight: bold;
+        font-size: 1.2rem;
+        .care-award {
+          font-weight: normal;
+          color: grey;
+          font-size: 0.8rem;
+        }
+      }
+      .number-length {
+        font-weight: bold;
+        font-size: 1.2rem;
+        .length-award {
+          font-weight: normal;
+          color: grey;
+          font-size: 0.8rem;
+          margin-left: 5px;
+        }
+      }
+    }
   }
-}
-`
+`;
 const Artist = () => {
   const { name } = useParams();
   // console.log(name)
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const [isModal,setIsModal] = useState(false)
-  const [isLoading,setIsLoading] = useState(false)
+  const navigate = useNavigate();
+  const [isModal, setIsModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
-      setIsLoading(true)
+      setIsLoading(true);
       await dispatch(getArtistPage({ name: name }));
-      setIsLoading(false)
+      setIsLoading(false);
     };
     fetch();
   }, [name]);
   const artistData = useSelector((state) => state.artist.artist);
 
-  const spotMusic = artistData?.sections?.find(item => item.title === "Bài hát nổi bật") 
-  const singleEp = artistData?.sections?.find(item => item.title === "Single & EP")
-  const albumList = artistData?.sections?.find(item => item.title === "Album")
-  const mvList = artistData?.sections?.find(item => item.title === "MV")
-  const comboList = artistData?.sections?.find(item => item.title === "Tuyển tập")
-  const familiar = artistData?.sections?.find(item => item.title === "Xuất hiện trong")
-  const youLike = artistData?.sections?.find(item => item.title === "Bạn Có Thể Thích")
-  
+  const spotMusic = artistData?.sections?.find(
+    (item) => item.title === "Bài hát nổi bật"
+  );
+  const singleEp = artistData?.sections?.find(
+    (item) => item.title === "Single & EP"
+  );
+  const albumList = artistData?.sections?.find(
+    (item) => item.title === "Album"
+  );
+  const mvList = artistData?.sections?.find((item) => item.title === "MV");
+  const comboList = artistData?.sections?.find(
+    (item) => item.title === "Tuyển tập"
+  );
+  const familiar = artistData?.sections?.find(
+    (item) => item.title === "Xuất hiện trong"
+  );
+  const youLike = artistData?.sections?.find(
+    (item) => item.title === "Bạn Có Thể Thích"
+  );
+
+  // console.log(artistData?.awards.length)
 
   const handleSongArtist = (item) => {
-    console.log(item.encodeId)
-    dispatch(setCurrSong(item))
-    dispatch(setIsPlayAudio(true))
-  }
+    // console.log(item.encodeId)
+    dispatch(setCurrSong(item));
+    dispatch(setIsPlayAudio(true));
+  };
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   // console.log(albumList)
-  return (
-    isLoading ? <AlbumLoading />  :  <ArtistPage>
+  return isLoading ? (
+    <AlbumLoading />
+  ) : (
+    <ArtistPage>
       <ArtistTop>
-        <img src={artistData?.cover} className='img-cover' alt="loading" loading="lazy" />
+        <img
+          src={artistData?.cover}
+          className="img-cover"
+          alt="loading"
+          loading="lazy"
+        />
         <div className="top-info">
           <div className="top-info-left">
             <div className="name">{artistData?.name}</div>
             <div className="follow">
-             <span className="follow-text">
+              <span className="follow-text">
                 <NumericFormat
                   displayType="text"
                   value={artistData?.follow}
                   thousandSeparator=","
-                /> 
-                <span style={{marginLeft:7}} className='care'>người quan tâm</span>
-             </span>
+                />
+                <span style={{ marginLeft: 7 }} className="care">
+                  người quan tâm
+                </span>
+              </span>
               <button>Quan tâm</button>
             </div>
           </div>
           <div className="top-info-right">
             <img src={zingAward} alt="none" />
-            <Tippy content={artistData?.awards?.map(item => item).join(',')}>
-            <img src={award} alt="" />
-        
-           </Tippy>
+            <Tippy content={artistData?.awards?.map((item) => item).join(",")}>
+              <img src={award} alt="" />
+            </Tippy>
           </div>
         </div>
       </ArtistTop>
       <ArtistContent>
         <SpotMusic>
-          <div className="title-spot">
-            <span>{spotMusic?.title}</span> 
-            <span className="all" style={{fontWeight:'normal',fontSize:'0.8rem',textDecoration:'underline'}}
-            onClick={() => navigate('bai-hat')}
-            >TẤT CẢ</span></div>
-          <div className="song-lists">
-            {spotMusic &&
-              spotMusic?.items?.slice(0, 6).map((item) => {
-                console.log(item.encodeId)
-                return (
-                  <>
-                    <div key={item.encodeId} className="song-item">
-                      <div className="left">
-                        <img src={item.thumbnailM} alt="" />
-                        <div className="info-left">
-                          <span
-                            className="title"
-                            onClick={() => handleSongArtist(item.encodeId)}
-                          >
-                            {item.title}
-                          </span>
-                          <span className="artist">
+          <div className="spot-info">
+            <div className="spot-left">
+              <span className="title-album-hot">Album Mới Phát Hành</span>
+              <div className="album-spot">
+                {!albumList ? (
+                  <div style={{ backgroundColor: "#E5E3DF" }}>
+                    Hiện nghệ sĩ chưa phát hành album nào gần đây
+                  </div>
+                ) : (
+                  albumList?.items?.slice(0, 1).map((item) => {
+                    return (
+                      <div
+                        key={item.encodeId}
+                        className="album-item"
+                        onClick={() => navigate(item.link.split(".")[0])}
+                      >
+                        <div className="left">
+                          <img src={item.thumbnailM} alt="none" />
+                        </div>
+                        <div className="right">
+                          <span className="type-album">Single</span>
+
+                          <span className="title-album">{item.title}</span>
+                          <span className="artists-album">
                             {item.artists?.map((item, index) => (
                               <Link to={item.link} key={index}>
                                 {(index ? ", " : "") + item.name}
                               </Link>
                             ))}
                           </span>
+                          <span className="date">{item.releaseDate}</span>
                         </div>
                       </div>
-                      <div className="duration">
-                        {format(+item.duration * 1000, { leading: true })}
+                    );
+                  })
+                )}
+              </div>
+            </div>
+            <div className="spot-right">
+              <div className="title-spot">
+                <span>{spotMusic?.title}</span>
+                <span
+                  className="all"
+                  style={{
+                    fontWeight: "normal",
+                    fontSize: "0.8rem",
+                    textDecoration: "underline",
+                  }}
+                  onClick={() => navigate("bai-hat")}
+                >
+                  TẤT CẢ
+                </span>
+              </div>
+              <div className="song-lists">
+                {spotMusic &&
+                  spotMusic?.items?.slice(0, 6).map((item) => {
+                    // console.log(item.encodeId)
+                    return (
+                      <div key={item.encodeId} className="song-item">
+                        <div className="left">
+                          <img src={item.thumbnailM} alt="" />
+                          <div className="info-left">
+                            <span
+                              className="title"
+                              onClick={() => handleSongArtist(item.encodeId)}
+                            >
+                              {item.title}
+                            </span>
+                            <span className="artist">
+                              {item.artists?.map((item, index) => (
+                                <Link to={item.link} key={index}>
+                                  {(index ? ", " : "") + item.name}
+                                </Link>
+                              ))}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="duration">
+                          {format(+item.duration * 1000, { leading: true })}
+                        </div>
                       </div>
-                    </div>
-                  </>
-                );
-              })}
+                    );
+                  })}
+              </div>
+            </div>
           </div>
         </SpotMusic>
         <Playlist>
@@ -762,16 +971,17 @@ const Artist = () => {
           <div className="playlist-content">
             {singleEp?.items?.slice(0, 5).map((item) => {
               return (
-                <div
-                  key={item.encodeId}
-                  className="playlist-item"
-                  onClick={() => navigate(item.link.split(".")[0])}
-                >
+                <div key={item.encodeId} className="playlist-item">
                   <div className="top">
                     <img src={item.thumbnailM} alt="none" />
                   </div>
                   <div className="bottom">
-                    <span className="title-playlist">{item.title}</span>
+                    <span
+                      className="title-playlist"
+                      onClick={() => navigate(item.link.split(".")[0])}
+                    >
+                      {item.title}
+                    </span>
                     <span className="artists-title">
                       {item.artists?.map((item, index) => (
                         <Link to={item.link} key={index}>
@@ -788,7 +998,7 @@ const Artist = () => {
         <AlbumList>
           <div className="playlist-title">{albumList?.title}</div>
           <div className="playlist-content">
-            {albumList?.items?.slice(0,5).map((item) => {
+            {albumList?.items?.slice(0, 5).map((item) => {
               return (
                 <div
                   key={item.encodeId}
@@ -827,7 +1037,7 @@ const Artist = () => {
                   </div>
                   <div className="bottom">
                     <div className="bottom-left">
-                      <img src={item.artist?.thumbnail} alt='none' />
+                      <img src={item.artist?.thumbnail} alt="none" />
                     </div>
                     <div className="bottom-right">
                       <span className="title-mv">{item.title}</span>
@@ -846,7 +1056,7 @@ const Artist = () => {
           </div>
         </MusicVideo>
         <ComboList>
-        <div className="playlist-title">{comboList?.title}</div>
+          <div className="playlist-title">{comboList?.title}</div>
           <div className="playlist-content">
             {comboList?.items?.map((item) => {
               return (
@@ -874,7 +1084,7 @@ const Artist = () => {
           </div>
         </ComboList>
         <Familiar>
-        <div className="playlist-title">{familiar?.title}</div>
+          <div className="playlist-title">{familiar?.title}</div>
           <div className="playlist-content">
             {familiar?.items?.map((item) => {
               return (
@@ -902,58 +1112,101 @@ const Artist = () => {
           </div>
         </Familiar>
         <YouLike>
-    <div className="artist-title">{youLike?.title}</div>
-    <div className="artists-list">
-      {youLike?.items.map((item) => {
-        return (
-          <div className="artist-item" key={item.id}>
-              <img src={item.thumbnail} alt="none" />
-            <div className="item-img" onClick={() => navigate(item.link)}>
-            </div>
-            <div className="item-info">
-              <Link to={item.link} className="info-name">
-                {item.name}
-              </Link>
-              <span className="info-follow">
-                {numberFollow(+item.totalFollow)} quan tâm
-              </span>
-            </div>
-            <button className="item-btn">Quan tâm</button>
+          <div className="artist-title">{youLike?.title}</div>
+          <div className="artists-list">
+            {youLike?.items.map((item) => {
+              return (
+                <div className="artist-item" key={item.id}>
+                  <img src={item.thumbnail} alt="none" />
+                  <div
+                    className="item-img"
+                    onClick={() => navigate(item.link)}
+                  ></div>
+                  <div className="item-info">
+                    <Link to={item.link} className="info-name">
+                      {item.name}
+                    </Link>
+                    <span className="info-follow">
+                      {numberFollow(+item.totalFollow)} quan tâm
+                    </span>
+                  </div>
+                  <button className="item-btn">Quan tâm</button>
+                </div>
+              );
+            })}
           </div>
-        );
-      })}
-    </div>
         </YouLike>
         <About>
-        <div className="about-title">Về {artistData?.name}</div>
-        <div className="about-info">
-          <div className="info-img"><img src={artistData?.thumbnailM} alt="none" /></div>
-          <div className="info">
-            <div className="description">
-              <span className="bio">
-                {
-                  artistData?.biography?.slice(0,345).replace(/<br>/g,'') + '...'
-                }
-              </span>
-              <span onClick={() => setIsModal(!isModal)} style={{cursor:'pointer',fontWeight:'bold'}}>Xem thêm</span>
-              <div className={isModal ? "overlay active" : "overlay"}>
-                
+          <div className="about-title">Về {artistData?.name}</div>
+          <div className="about-info">
+            <div className="info-img">
+              <img src={artistData?.thumbnailM} alt="none" />
+            </div>
+            <div className="info">
+              <div className="description">
+                <span className="bio">
+                  {artistData?.biography?.slice(0, 345).replace(/<br>/g, "") +
+                    "..."}
+                </span>
+                <span
+                  onClick={() => setIsModal(!isModal)}
+                  style={{ cursor: "pointer", fontWeight: "bold" }}
+                >
+                  Xem thêm
+                </span>
+                <div className={isModal ? "overlay active" : "overlay"}></div>
+                <div className="zm-modal">
+                  <div className={isModal ? "modal active" : "modal"}>
+                    <div className="modal-content">
+                      <img src={artistData?.thumbnail} alt="" />
+                      <span
+                        style={{
+                          marginTop: 20,
+                          fontWeight: "bold",
+                          fontSize: "1.2rem",
+                        }}
+                      >
+                        {artistData?.name}
+                      </span>
+                      <span className="bio-full">
+                        {artistData?.biography?.replace(/<br>/g, "")}
+                      </span>
+                      <span
+                        className="close"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => setIsModal(!isModal)}
+                      >
+                        <IoCloseOutline />
+                      </span>
+                    </div>
+                  </div>
+                  <div></div>
+                </div>
               </div>
-              <div className="zm-modal">
-              <div className={isModal ? "modal active" : "modal"}>
-                <div className="modal-content">
-                    <img src={artistData?.thumbnail} alt="" />
-                    <span style={{marginTop:20,fontWeight:'bold',fontSize:'1.2rem'}}>{artistData?.name}</span>
-                    <span className="bio-full">{artistData?.biography?.replace(/<br>/g,'')}</span>
-                    <span className="close" style={{cursor:'pointer'}} onClick={() => setIsModal(!isModal)} ><IoCloseOutline /></span>
-                </div>
-                </div>
-              <div>
+              <div className="award-artist">
+                <span className="follow-award">
+                  <NumericFormat
+                    displayType="text"
+                    value={artistData?.follow}
+                    thousandSeparator=","
+                  />
+                  <span style={{ marginLeft: 7 }} className="care-award">
+                    người quan tâm
+                  </span>
+                </span>
+                <span className="number-length">
+                  {artistData?.awards?.length ? artistData?.awards?.length : 0}
+                  <span className="length-award">giải thưởng</span>
+                </span>
+                <img src={zingAward} alt="none" />
+                <Tippy
+                  content={artistData?.awards?.map((item) => item).join(",")}
+                >
+                  <img src={award} alt="" />
+                </Tippy>
+              </div>
             </div>
           </div>
-        </div>
-        </div>
-        </div>
         </About>
       </ArtistContent>
     </ArtistPage>

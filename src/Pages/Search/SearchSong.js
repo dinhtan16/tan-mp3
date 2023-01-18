@@ -52,11 +52,20 @@ const Song = styled.section`
             /**Major Properties**/
             font-size: 0.8rem;
             font-weight: bold;
+
+            &:hover{
+              color:#af8f8e;
+
+            }
           }
           .artist {
             font-size: 0.7rem;
             color: grey;
             margin-top: 5px;
+            a:hover{
+              text-decoration: underline;
+              color:#af8f8e;
+            }
           }
         }
       }

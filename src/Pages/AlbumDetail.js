@@ -37,26 +37,6 @@ const AlbumDetail = () => {
 
   const [artistData, setArtistData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  // const [active, setActive] = useState(null);
-
-  // const { thumbData, artistData, songOuter, songData } = useSelector(
-  //   (state) => state.playlist
-  // );
-  // const isLoadingAlbum = useSelector(state => state.setID.isLoadingAlbum)
-  // useEffect(() => {
-  //   dispatch(getPlaylistData(id));
-
-  // }, [id]);
-  // console.log(thumbData);
-  // useEffect(() => {
-  //   setIsLoading(true); //TODO:
-  //   setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 2900);
-  //   return () => {
-  //     clearTimeout();
-  //   };
-  // }, []);
   useEffect(() => {
     const fetchDetailAlbumPlaylist = async () => {
       try {
