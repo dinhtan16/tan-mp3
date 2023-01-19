@@ -70,20 +70,7 @@ const AlbumDetail = () => {
      dispatch(getPlaylistData({id: id}))
 
   }, [id]);
-  // useEffect(() => {
-  //   // dispatch(getDetailPlaylist(id))
-  //   // console.log(id)
-  //   const fetch = async () => {
-  //     try {
-  //       await  dispatch(getPlaylistData(id))
-  //       return
-  //       // handle result here
-  //     } catch (rejectedValueOrSerializedError) {
-  //       // handle error here
-  //     }
-  //   }
-  //   fetch()
-  // },[id])
+
 
   const handleSong = (item) => {
 

@@ -1,19 +1,33 @@
 import { Routes, Route } from "react-router-dom";
 
-import React from "react";
-import Home from "../Pages/Home";
-import Artist from "../Pages/Artist";
-import Proflie from "../Pages/Proflie";
-import AlbumDetail from "../Pages/AlbumDetail";
-import ZingChartWeek from "../Pages/ZingChartWeek";
-import ZingChartSong from "../Pages/ZingChartSong";
-import SearchPage from "../Pages/Search/SearchPage";
-import SearchAll from "../Pages/Search/SearchAll";
-import SearchSong from "../Pages/Search/SearchSong";
-import SearchAlbum from "../Pages/Search/SearchAlbum";
-import ArtistPageSong from "../Pages/Search/Artist/ArtistPageSong";
+import React, { useState } from "react";
+import Home from "../pages/Home";
+import Artist from "../pages/Artist";
+import Proflie from "../pages/Proflie";
+import AlbumDetail from "../pages/AlbumDetail";
+import ZingChartWeek from "../pages/ZingChartWeek";
+import ZingChartSong from "../pages/ZingChartSong";
+import SearchPage from "../pages/Search/SearchPage";
+import SearchAll from "../pages/Search/SearchAll";
+import SearchSong from "../pages/Search/SearchSong";
+import SearchAlbum from "../pages/Search/SearchAlbum";
+import ArtistPageSong from "../pages/Search/Artist/ArtistPageSong";
+import { getChartHome } from "../api/getChartHome";
 
 function RouteLayout() {
+  const [chartHome,setChartHome] = useState([])
+  const [isLoading,setIsLoading] = useState(false)
+
+  React.useEffect(() => {
+    const fetch = async () => {
+      setIsLoading(true)
+      const res = await getChartHome();
+      
+      setChartHome(res?.data?.data?.weekChart);
+      setIsLoading(false)
+    };
+    fetch();
+  }, []);
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -22,8 +36,11 @@ function RouteLayout() {
       <Route path="/playlist/:title/:id" element={<AlbumDetail />} />
       <Route path="/album/:title/:id" element={<AlbumDetail />} />
       <Route path="/bai-hat/:title/:id" element={<AlbumDetail />} />
-      <Route path="/zing-chart-tuan/:title/:id" element={<ZingChartWeek />} />
-      <Route path="/zing-chart-tuan/:title/:id" element={<ZingChartWeek />} />
+      <Route path="/zing-chart-tuan/:title/:id" element={<ZingChartWeek isLoading={isLoading} weekChart={chartHome && Object.values(chartHome)} />}>
+      
+
+      </Route>
+      {/* <Route path="/zing-chart-tuan/:title/:id" element={<ZingChartWeek />} /> */}
       <Route path="/zing-chart" element={<ZingChartSong />} />
       <Route path="/:name/" element={<Artist />}>
 

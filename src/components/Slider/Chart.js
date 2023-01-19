@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import RankItem from "./Chart/RankItem";
 import _  from 'lodash'
 import RankItemChart from "./Chart/RankItemChart";
+import { useNavigate } from "react-router-dom";
 const ChartContainer = styled.div.attrs(() => ({
   className:'container'
 }))`
@@ -123,6 +124,7 @@ const SectionChart = styled.div`
   color: white;
 `;
 const ChartHome = ({disableItem}) => {
+  const navigate=useNavigate()
   // console.log(disableItem)
   const dataChart = useSelector((state) => state.homeData.chart);
   const chart = dataChart?.chart;
@@ -189,7 +191,7 @@ const ChartHome = ({disableItem}) => {
                   );
                 })}
               </div>
-              <button>Xem thêm</button>
+              <button onClick={() => navigate('zing-chart')}>Xem thêm</button>
             </div>
           </div>
           <div className={disableItem ? "charts fullw" : "charts"}>

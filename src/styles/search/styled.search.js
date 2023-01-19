@@ -17,7 +17,7 @@ export const SearchInput = styled.input`
     min-width: 450px;
   }
   /* width: 100%; */
-  min-width: 190px;
+  width: 170px;
   height: 40px;
   border-radius: 20px;
   border: 0;

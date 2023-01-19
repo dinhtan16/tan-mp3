@@ -12,7 +12,7 @@ const SearchPageContainer = styled.div`
     gap: 1.4rem;
     flex-wrap: wrap;
     align-items: center;
-    padding: 10px 0;
+    /* padding: 10px 0; */
     border-bottom: 1px solid #ceccc8;
 
     span {
@@ -22,10 +22,14 @@ const SearchPageContainer = styled.div`
       font-size: 0.9rem;
       display: flex;
       gap:2rem;
+      a{
+        padding: 15px 0;
+      }
       a.active {
         color: #844d4d;
         font-weight: bold;
-        text-decoration: underline;
+        /* text-decoration: underline; */
+        border-bottom: 1px solid  #844d4d;
         /* offset-position: left 10px; */
       }
     }

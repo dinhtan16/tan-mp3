@@ -3,7 +3,7 @@ import Chart from "../components/Slider/Chart";
 import { getChartHome } from "../api/getChartHome";
 import format from "format-duration";
 import styled from "styled-components";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setCurrSong, setIsPlayAudio } from "../stores/Slices/setIDSlice";
 import AlbumLoading from "../components/Loading/albumLoading";
@@ -54,7 +54,7 @@ const ZingChart = styled.div`
             width: 50%;
         }
         /* min-width: 30%; */
-        background-color: #fff;
+        background-color: rgba(255,255,255,0.5);
         border-radius: 8px;
         padding:20px;
         h2{
@@ -244,7 +244,7 @@ const ZingChartSong = () => {
     const navigate = useNavigate()
   useEffect(() => {
     const fetch = async () => {
-      setIsLoading(false);
+      setIsLoading(true);
       const res = await getChartHome();
 
       setSongChartData(res?.data?.data);
@@ -261,14 +261,14 @@ const ZingChartSong = () => {
     } else {
       setSongDataCut(songChartData?.RTChart?.items);
     }
-  }, [isShowFull, songChartData]);
+  }, [isShowFull,songChartData]);
 
   const handleSong = (item) => {
     dispatch(setCurrSong(item.encodeId));
     dispatch(setIsPlayAudio(true));
   };
   // console.log(
-  //   songChartData?.weekChart && Object.entries(songChartData?.weekChart)
+  //   songChartData?.weekChart
   // );
   return isLoading ? (
     <AlbumLoading />
@@ -397,7 +397,7 @@ const ZingChartSong = () => {
                       </div>
                       <div className="more-btn">
                                <button onClick={() => navigate(item[1].link.split('.')[0])}>
-                                 {!isShowFull ? "Xem top 100" : "Xem top 10"}
+                                 Xem thêm
                                </button>
                              </div>
                       </div>
