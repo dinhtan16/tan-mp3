@@ -17,7 +17,7 @@ import {
   getTheme1Data,
   getTopHundred,
   getWeekChart,
-} from ".././stores/Slices/HomeDataSlice";
+} from "../stores/Slices/HomeDataSlice";
 import { useSelector, useDispatch } from "react-redux";
 import FirstTheme from "../components/Slider/FirstTheme";
 // import ArtistSlide from "../components/Slider/ArtistSlide";
