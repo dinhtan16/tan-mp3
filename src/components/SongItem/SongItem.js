@@ -94,7 +94,7 @@ const SongItem = ({ data ,isRightSideBar}) => {
             </div>
             <div className={isActiveTab ? "info-artist active" : "info-artist"}>
                 {
-                    data?.artists.map((item,index) => (
+                    data?.artists?.map((item,index) => (
                         <Link key={index} to={item.link}>{ (index ? ', ' : '') + item.name } </Link>
 
                     )
