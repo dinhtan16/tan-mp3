@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import moment from 'moment'
 import 'moment/locale/vi'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrSong, setIsPlayAudio } from "../../stores/Slices/setIDSlice";
 const SongItemStyle = styled.div`
   width: 30%;
   /* margin-top: 0.5rem; */
-
+  &.sidebar-container{
+    width: 100% !important;
+  }
   @media screen and (max-width: 964px) {
     width: 50%;
     /* margin-top: 0.7rem; */
@@ -18,6 +20,16 @@ const SongItemStyle = styled.div`
     padding: 10px;
     &:hover{
         background-color: #D9D7D3;
+    }
+    &.active{
+      background-color: #644646;
+      color:#fff;
+      border-radius: 10px;
+
+    }
+    &.sidebar{
+    border-radius: 10px;
+
     }
     display: flex;  
     align-items: center;
@@ -40,7 +52,18 @@ const SongItemStyle = styled.div`
             font-size: 0.8rem;
             color: grey;
             margin-top: 5px;
+            &.sidebar{
+          display: none;
+            }
+            &.active{
+              color:#fff;
 
+              
+            }
+            &.active a:hover{
+              color:#fff;
+              text-decoration: underline;
+            }
             a:hover{
                 color: #5A3F3F;
             }
@@ -49,8 +72,10 @@ const SongItemStyle = styled.div`
     }
   }
 `;
-const SongItem = ({ data }) => {
+const SongItem = ({ data ,isRightSideBar}) => {
   // console.log(data)
+  const isActiveTab = useSelector(state => state.setID.isActiveTab)
+  // console.log(isActiveTab)
   const dispatch = useDispatch()
   const handleSong = () => {
      dispatch(setCurrSong(data?.encodeId))
@@ -58,8 +83,8 @@ const SongItem = ({ data }) => {
 
   }
   return (
-    <SongItemStyle>
-      <div className="container-item">
+    <SongItemStyle isRightSideBar className={isRightSideBar ? 'sidebar-container' : ''}>
+      <div className={isActiveTab ? "container-item active" : isRightSideBar ? "container-item sidebar" : "container-item"}>
         <div className="item-img">
             <img src={data.thumbnailM} alt="" />
         </div>
@@ -67,7 +92,7 @@ const SongItem = ({ data }) => {
             <div className="info-title" onClick={handleSong}>
             {data?.title}
             </div>
-            <div className="info-artist">
+            <div className={isActiveTab ? "info-artist active" : "info-artist"}>
                 {
                     data?.artists.map((item,index) => (
                         <Link key={index} to={item.link}>{ (index ? ', ' : '') + item.name } </Link>
@@ -76,7 +101,7 @@ const SongItem = ({ data }) => {
                     )
                 }
             </div>
-            <div className="info-release">
+            <div className={isRightSideBar ? "info-release sidebar" : "info-release"}>
                 {moment(data?.releaseDate * 1000).fromNow() }
             </div>
        </div>

@@ -13,11 +13,11 @@ export const Loading = styled.div`
   padding-left: 0.4rem;
 `;
 export const SearchInput = styled.input`
-  @media screen and (min-width: 964px) {
+  @media screen and (min-width: 1124px) {
     min-width: 450px;
   }
   /* width: 100%; */
-  width: 170px;
+  width: 190px;
   height: 40px;
   border-radius: 20px;
   border: 0;

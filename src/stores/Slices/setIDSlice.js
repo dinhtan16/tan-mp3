@@ -10,12 +10,19 @@ const songSlice = createSlice({
     isActiveTab: null,
     isActiveRight: false,
     isLoadingAlbum: false,
+    recentSong:null
   },
   reducers: {
     setCurrSong: (state, action) => {
       return {
         ...state,
         currSongID: action.payload,
+      };
+    },
+    setRecentSongId: (state, action) => {
+      return {
+        ...state,
+        recentSong: action.payload,
       };
     },
     setCurrAlbum: (state, action) => {
@@ -66,6 +73,7 @@ export const {
   setIsActiveTab,
   setIsActiveRight,
   setIsLoadingAlbum,
+  setRecentSongId
 } = songSlice.actions;
 export default songSlice.reducer;
 // extraReducers: {

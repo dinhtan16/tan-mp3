@@ -33,6 +33,7 @@ import {MdOutlineOndemandVideo
   } from 'react-icons/md'
 
 import {GiMicrophone} from 'react-icons/gi'
+import { setRecentSongData } from "../../stores/Slices/PlaylistSlice";
 
 
 export const PlayerContainer = styled.div`
@@ -292,6 +293,7 @@ const Player = () => {
       const res = await getSongInfo(songID);
       setIsLoadingSong(false)
       setSongData(res?.data?.data);
+      dispatch(setRecentSongData(res?.data?.data))
       const albumLink = res?.data?.data?.album?.link;
       const albumCutLink = albumLink?.split(".")[0];
       setAlbum(albumCutLink);

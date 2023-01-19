@@ -20,12 +20,12 @@ const bannerConfig = {
 const setIDConfig = {
   ...persistConfig,
   key:'setID',
-  whitelist:['currSongID','currAlbumID','atAlbum']
+  whitelist:['currSongID','currAlbumID','atAlbum','recentSong']
 }
 const playlistConfig = {
   ...persistConfig,
   key:'playlist',
-  whitelist:['songSearchData']
+  whitelist:['songSearchData','recentSongData']
 }
 const searchResultConfig = {
   ...persistConfig,

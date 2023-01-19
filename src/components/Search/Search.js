@@ -8,10 +8,7 @@ import {
   Loading,
   ClearIcon
 } from "../../styles/search/styled.search";
-import {
-  GrFormNextLink,
-GrFormPreviousLink
-} from 'react-icons/gr'
+
 import {  Discuss } from "react-loader-spinner";
 import { CiSearch } from "react-icons/ci";
 import { getSearchData } from "../../stores/Slices/SearchSlice";
