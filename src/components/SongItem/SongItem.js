@@ -1,110 +1,116 @@
 import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import moment from 'moment'
-import 'moment/locale/vi'
+import moment from "moment";
+import "moment/locale/vi";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrSong, setIsPlayAudio } from "../../stores/Slices/setIDSlice";
 const SongItemStyle = styled.div`
   width: 30%;
   /* margin-top: 0.5rem; */
-  &.sidebar-container{
+  &.sidebar-container {
     width: 100% !important;
   }
   @media screen and (max-width: 964px) {
     width: 50%;
     /* margin-top: 0.7rem; */
   }
-  .container-item{
+  .container-item {
     cursor: pointer;
     padding: 10px;
-    &:hover{
-        background-color: #D9D7D3;
+    &:hover {
+      background-color: #d9d7d3;
     }
-    &.active{
+    &.active {
       background-color: #644646;
-      color:#fff;
+      color: #fff;
       border-radius: 10px;
-
     }
-    &.sidebar{
-    border-radius: 10px;
-
+    &.sidebar {
+      border-radius: 10px;
     }
-    display: flex;  
+    display: flex;
     align-items: center;
     gap: 0.4rem;
     .item-img {
-        width: 60px;
-        height: 60px;
-        img{
-            width: 100%;
-            height: 100%;
-            border-radius: 8px;
-        }
+      width: 60px;
+      height: 60px;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+      }
     }
-    .info{
-        flex: 1;
-        .info-title{
-            font-size: 0.9rem;
-        }
-        .info-artist,.info-release{
-            font-size: 0.8rem;
-            color: grey;
-            margin-top: 5px;
-            &.sidebar{
+    .info {
+      flex: 1;
+      .info-title {
+        font-size: 0.9rem;
+      }
+      .info-artist,
+      .info-release {
+        font-size: 0.8rem;
+        color: grey;
+        margin-top: 5px;
+        &.sidebar {
           display: none;
-            }
-            &.active{
-              color:#fff;
-
-              
-            }
-            &.active a:hover{
-              color:#fff;
-              text-decoration: underline;
-            }
-            a:hover{
-                color: #5A3F3F;
-            }
         }
-        
+        &.active {
+          color: #fff;
+        }
+        &.active a:hover {
+          color: #fff;
+          text-decoration: underline;
+        }
+        a:hover {
+          color: #5a3f3f;
+        }
+      }
     }
   }
 `;
-const SongItem = ({ data ,isRightSideBar}) => {
+const SongItem = ({ data, isRightSideBar }) => {
   // console.log(data)
-  const isActiveTab = useSelector(state => state.setID.isActiveTab)
+  const isActiveTab = useSelector((state) => state.setID.isActiveTab);
   // console.log(isActiveTab)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleSong = () => {
-     dispatch(setCurrSong(data?.encodeId))
-     dispatch(setIsPlayAudio(true))
-
-  }
+    dispatch(setCurrSong(data?.encodeId));
+    dispatch(setIsPlayAudio(true));
+  };
   return (
-    <SongItemStyle isRightSideBar className={isRightSideBar ? 'sidebar-container' : ''}>
-      <div className={isActiveTab ? "container-item active" : isRightSideBar ? "container-item sidebar" : "container-item"}>
+    <SongItemStyle
+      isRightSideBar
+      className={isRightSideBar ? "sidebar-container" : ""}
+    >
+      <div
+        className={
+          isActiveTab
+            ? "container-item active"
+            : isRightSideBar
+            ? "container-item sidebar"
+            : "container-item"
+        }
+      >
         <div className="item-img">
-            <img src={data.thumbnailM} alt="" />
+          <img src={data?.thumbnailM} alt="" />
         </div>
-       <div className="info">
-            <div className="info-title" onClick={handleSong}>
+        <div className="info">
+          <div className="info-title" onClick={handleSong}>
             {data?.title}
-            </div>
-            <div className={isActiveTab ? "info-artist active" : "info-artist"}>
-                {
-                    data?.artists?.map((item,index) => (
-                        <Link key={index} to={item.link}>{ (index ? ', ' : '') + item.name } </Link>
-
-                    )
-                    )
-                }
-            </div>
-            <div className={isRightSideBar ? "info-release sidebar" : "info-release"}>
-                {moment(data?.releaseDate * 1000).fromNow() }
-            </div>
-       </div>
+          </div>
+          <div className={isActiveTab ? "info-artist active" : "info-artist"}>
+            {data?.artists?.map((item, index) => (
+              <Link key={index} to={item.link}>
+                {(index ? ", " : "") + item.name}{" "}
+              </Link>
+            ))}
+          </div>
+          <div
+            className={isRightSideBar ? "info-release sidebar" : "info-release"}
+          >
+            {moment(data?.releaseDate * 1000).fromNow()}
+          </div>
+        </div>
       </div>
     </SongItemStyle>
   );

@@ -328,7 +328,7 @@ const Player = () => {
         setCurrSecond(0);
         dispatch(setIsPlayAudio(false));
       } else {
-        let keys = Object.keys(data);
+        let keys =data && Object.keys(data);
         let audioInfo = data[keys[0]];
         setAudioData(audioInfo);
       }
