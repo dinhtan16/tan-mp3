@@ -8,9 +8,23 @@ import { useDispatch } from "react-redux";
 import { setCurrSong, setIsPlayAudio } from "../../stores/Slices/setIDSlice";
 import { numberFollow } from "../../components/customHook/fnNumber";
 
-const SearchPage = styled.div`
+const SearchAllPage = styled.div`
   height: 420px;
   overflow-y: scroll;
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
   @media screen and (min-height:1124px) {
     height: 905px;
   }
@@ -368,7 +382,7 @@ const SearchAll = () => {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <SearchPage>
+    <SearchAllPage>
     
       
       {searchData.length !== 0 && <>
@@ -535,7 +549,7 @@ const SearchAll = () => {
        
       }
     
-    </SearchPage>
+    </SearchAllPage>
   );
 };
 

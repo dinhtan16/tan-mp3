@@ -11,6 +11,20 @@ import AlbumLoading from "../components/Loading/albumLoading";
 const WeekChartPage = styled.section`
 padding: 40px 59px;
 /* height: 480px; */
+::-webkit-scrollbar {
+    width: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 overflow-y: scroll;
 @media screen and (max-width:880px) {
     height: 480px; 

@@ -45,6 +45,12 @@ const SongItemStyle = styled.div`
       flex: 1;
       .info-title {
         font-size: 0.9rem;
+        -webkit-box-orient: vertical;
+        display: block;
+        display: -webkit-box;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
       }
       .info-artist,
       .info-release {
@@ -84,10 +90,9 @@ const SongItem = ({ data, isRightSideBar }) => {
     >
       <div
         className={
-          isActiveTab
-            ? "container-item active"
-            : isRightSideBar
-            ? "container-item sidebar"
+          isActiveTab || isRightSideBar
+            ? "container-item active sidebar"
+            
             : "container-item"
         }
       >
@@ -98,7 +103,7 @@ const SongItem = ({ data, isRightSideBar }) => {
           <div className="info-title" onClick={handleSong}>
             {data?.title}
           </div>
-          <div className={isActiveTab ? "info-artist active" : "info-artist"}>
+          <div className={isActiveTab || isRightSideBar ? "info-artist active" : "info-artist"}>
             {data?.artists?.map((item, index) => (
               <Link key={index} to={item.link}>
                 {(index ? ", " : "") + item.name}{" "}

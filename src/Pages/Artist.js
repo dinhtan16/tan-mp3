@@ -20,6 +20,20 @@ const ArtistPage = styled.div`
   height: 500px;
   overflow-y: scroll;
   overflow-x: hidden;
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
   @media screen and (min-height:1124px) {
     height: 968px;
   }

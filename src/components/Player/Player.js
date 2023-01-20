@@ -91,11 +91,39 @@ export const SongInfoPlayer = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     overflow-x: scroll;
+    ::-webkit-scrollbar {
+    height:1px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
     .artist {
       font-size: 0.8rem;
       color: #333;
       overflow-y: scroll;
       height: 30px;
+      ::-webkit-scrollbar {
+    width: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
     }
     a:hover {
       text-decoration: underline;
