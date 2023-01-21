@@ -52,17 +52,14 @@ export const SongInfoPlayer = styled.div`
   ::-webkit-scrollbar {
     width: 3px;
   }
-
   /* Track */
   ::-webkit-scrollbar-track {
     background: transparent;
   }
-
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: #888;
   }
-
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
@@ -75,7 +72,6 @@ export const SongInfoPlayer = styled.div`
     height: 64px;
     border-radius: 8px;
     flex-shrink: 0;
-
     img {
       vertical-align: top;
       width: 100%;
@@ -100,7 +96,6 @@ export const SongInfoPlayer = styled.div`
   ::-webkit-scrollbar-thumb {
     background: #888;
   }
-
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
@@ -119,7 +114,6 @@ export const SongInfoPlayer = styled.div`
   ::-webkit-scrollbar-thumb {
     background: #888;
   }
-
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
@@ -167,7 +161,6 @@ export const ActionPlayer = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-
     
     }
     .small {
@@ -201,11 +194,9 @@ export const ActionPlayer = styled.div`
     .progress-bar {
       position: relative;
       width: 88%;
-
       height: 3px;
       margin: auto;
       background-color: #c7c3bb;
-
       &:hover,
       &:hover .progress-bar-active {
         height: 5px;
@@ -230,7 +221,6 @@ export const ActionPlayer = styled.div`
         /* right: 0; */
         margin: auto;
         background-color: #644646;
-
         &:hover {
         }
       }
@@ -256,15 +246,12 @@ export const VolumeActionPlayer = styled.div`
   .icon.active{
     background-color: #644646;
     color:white;
-
-
     border-radius: 2px;
   }
   .volume{
     display: flex;
     align-items: center;
     gap: 10px;
-
     input{
       border: none;
       outline: none;
@@ -400,13 +387,13 @@ const Player = () => {
     if (isPlayAudio) {
 
       play();
-      intervalID = setInterval(() => {
-        let percent =
-          Math.round((audioDom.currentTime * 10000) / songData?.duration) / 100;
-        progressRef.current.style.width = percent + "%";
-        setCurrSecond(Math.round(audioDom.currentTime));
-        // console.log(percent)
-      }, 100);
+      // intervalID = setInterval(() => {
+      //   let percent =
+      //     Math.round((audioDom.currentTime * 10000) / songData?.duration) / 100;
+      //   progressRef.current.style.width = percent + "%";
+      //   setCurrSecond(Math.round(audioDom.currentTime));
+      //   // console.log(percent)
+      // }, 50);
     
     }
     
@@ -432,18 +419,30 @@ const Player = () => {
     } else {
       play();
       dispatch(setIsPlayAudio(true));
-      intervalID = setInterval(() => {
+      // intervalID = setInterval(() => {
+      //   let percent =
+      //     Math.round((audioDom.currentTime * 10000) / songData?.duration) / 100;
+      //   progressRef.current.style.width = percent + "%";
+      //   setCurrSecond(Math.round(audioDom.currentTime));
+      //   // console.log(percent)
+      // }, 50);
+      
+    }
+    // console.log(isPlayAudio)
+  };
+    useEffect(() =>{
+    const intervalID = setInterval(() => {
         let percent =
           Math.round((audioDom.currentTime * 10000) / songData?.duration) / 100;
         progressRef.current.style.width = percent + "%";
         setCurrSecond(Math.round(audioDom.currentTime));
         // console.log(percent)
-      }, 50);
-      
-    }
-    // console.log(isPlayAudio)
-  };
+      }, 100);
 
+      return () => {
+        clearInterval(intervalID)
+      }
+    },[songData])
   const handleProgress = (e) => {
     const trackRect = trackRef.current.getBoundingClientRect();
     const percentage =
@@ -594,7 +593,7 @@ const Player = () => {
             onClick={(e) => handleProgress(e)}
             ref={trackRef}
           >
-            <div className="progress-bar-active" ref={progressRef}></div>
+            <div className="progress-bar-active"    ref={progressRef} ></div>
           </div>
           <div className="end">{format(songData?.duration * 1000)}</div>
         </div>
