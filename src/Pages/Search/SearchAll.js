@@ -5,7 +5,7 @@ import styled from "styled-components";
 import format from "format-duration";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCurrSong, setIsPlayAudio } from "../../stores/Slices/setIDSlice";
+import { setCurrSong, setIsPlayAudio, setRecentPlayedSong } from "../../stores/Slices/setIDSlice";
 import { numberFollow } from "../../components/customHook/fnNumber";
 
 const SearchAllPage = styled.div`
@@ -25,7 +25,7 @@ const SearchAllPage = styled.div`
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
-  @media screen and (min-height:1124px) {
+  @media screen and (min-height:1024px) {
     height: 905px;
   }
   @media screen and (max-height:500px) {
@@ -375,6 +375,8 @@ const SearchAll = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleSong = (item) => {
+    const {thumbnailM,title,encodeId,artists,duration} = item
+    dispatch(setRecentPlayedSong({title,encodeId,artists,thumbnailM,duration}))
     dispatch(setCurrSong(item.encodeId))
     dispatch(setIsPlayAudio(true))
   }

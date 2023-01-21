@@ -4,7 +4,7 @@ import styled from "styled-components";
 import moment from "moment";
 import "moment/locale/vi";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrSong, setIsPlayAudio } from "../../stores/Slices/setIDSlice";
+import { setCurrSong, setIsPlayAudio, setRecentPlayedSong } from "../../stores/Slices/setIDSlice";
 const SongItemStyle = styled.div`
   width: 30%;
   /* margin-top: 0.5rem; */
@@ -75,12 +75,15 @@ const SongItemStyle = styled.div`
   }
 `;
 const SongItem = ({ data, isRightSideBar }) => {
-  // console.log(data)
-  const isActiveTab = useSelector((state) => state.setID.isActiveTab);
+  const {encodeId,title,thumbnailM,artists,duration} = data
+  // console.log(encodeId)
+  // const isActiveTab = useSelector((state) => state.setID.isActiveTab);
   // console.log(isActiveTab)
   const dispatch = useDispatch();
   const handleSong = () => {
-    dispatch(setCurrSong(data?.encodeId));
+    // const {thumbnailM,title,encodeId,artists,duration} = item
+    dispatch(setRecentPlayedSong({encodeId,title,thumbnailM,artists,duration}))
+    dispatch(setCurrSong(data?.encodeId))
     dispatch(setIsPlayAudio(true));
   };
   return (
@@ -90,7 +93,7 @@ const SongItem = ({ data, isRightSideBar }) => {
     >
       <div
         className={
-          isActiveTab || isRightSideBar
+           isRightSideBar
             ? "container-item active sidebar"
             
             : "container-item"
@@ -103,7 +106,7 @@ const SongItem = ({ data, isRightSideBar }) => {
           <div className="info-title" onClick={handleSong}>
             {data?.title}
           </div>
-          <div className={isActiveTab || isRightSideBar ? "info-artist active" : "info-artist"}>
+          <div className={ isRightSideBar ? "info-artist active" : "info-artist"}>
             {data?.artists?.map((item, index) => (
               <Link key={index} to={item.link}>
                 {(index ? ", " : "") + item.name}{" "}

@@ -41,13 +41,22 @@ const playlistSlice = createSlice({
   initialState: {
     songData: [],
     songSearchData:[],
-    recentSongData:[]
+    recentSongData:[],
+    recentTitlePlaylist:null,
+    recentLink:null
   },
   reducers: {
     setRecentSongData:(state,action) =>{
       state.recentSongData = action.payload
 
+    },
+    setRecentTitle:(state,action) => {
+      state.recentTitlePlaylist = action.payload
+    },
+    setRecentLink:(state,action) => {
+      state.recentLink = action.payload
     }
+    
   },
   extraReducers: (builder) => {
 
@@ -60,7 +69,7 @@ const playlistSlice = createSlice({
   },
 });
 
-export const { setRecentSongData } = playlistSlice.actions;
+export const { setRecentSongData,setRecentTitle ,setRecentLink} = playlistSlice.actions;
 export default playlistSlice.reducer;
 // extraReducers: {
 //   [getHomeData.pending]: (state, action) => {

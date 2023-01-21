@@ -10,7 +10,8 @@ const songSlice = createSlice({
     isActiveTab: null,
     isActiveRight: false,
     isLoadingAlbum: false,
-    recentSong:null
+    recentAlbumId:null,
+    recentPlayedSong:[]
   },
   reducers: {
     setCurrSong: (state, action) => {
@@ -19,10 +20,10 @@ const songSlice = createSlice({
         currSongID: action.payload,
       };
     },
-    setRecentSongId: (state, action) => {
+    setRecentAlbumId: (state, action) => {
       return {
         ...state,
-        recentSong: action.payload,
+        recentAlbumId: action.payload,
       };
     },
     setCurrAlbum: (state, action) => {
@@ -62,6 +63,23 @@ const songSlice = createSlice({
         isLoadingAlbum: action.payload,
       };
     },
+    setRecentPlayedSong: (state, action) => {
+      let songLists = state.recentPlayedSong
+      if(state.recentPlayedSong?.some(i => i.encodeId === action.payload.encodeId)){
+        songLists= songLists.filter(i => i.encodeId !== action.payload.encodeId)
+      }
+      if(action.payload){
+        if(songLists.length > 20){
+          songLists = songLists.filter((i,index,self) => index !== self.length -1)
+        }
+      }
+      songLists = [action.payload,...songLists]
+      
+      return {
+        ...state,
+        recentPlayedSong : songLists
+    }
+   } 
   },
 });
 
@@ -73,7 +91,8 @@ export const {
   setIsActiveTab,
   setIsActiveRight,
   setIsLoadingAlbum,
-  setRecentSongId
+  setRecentAlbumId,
+  setRecentPlayedSong
 } = songSlice.actions;
 export default songSlice.reducer;
 // extraReducers: {

@@ -11,6 +11,9 @@ import AlbumLoading from '../../components/Loading/albumLoading';
 const Playlist = styled.section`
     height: 480px;
     overflow-y: scroll;
+    @media screen and (min-height:1024px) {
+    height: 905px;
+   }
   .playlist-title {
     font-size: 1.2rem;
     margin-top: 2rem;

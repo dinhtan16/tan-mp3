@@ -22,10 +22,10 @@ padding: 30px 59px;
 flex-direction: column;
 gap:5rem; */
 @media screen and (max-width:880px) {
-    height: 480px; 
+    height: 490px; 
   }
   @media screen and (max-height:500px) {
-    height: 210px;
+    height: 290px;
   }
 /* @media screen and (max-width:880px) {
     height: 918px; 
@@ -33,7 +33,7 @@ gap:5rem; */
 @media screen and (min-width:880px) {
     height: 540px;  
   }
-  @media screen and (min-height:1124px) {
-    height: 968px;
+  @media screen and (min-height:1024px) {
+    height: 920px;
   }
 `;

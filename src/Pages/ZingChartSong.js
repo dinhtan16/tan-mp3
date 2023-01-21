@@ -5,7 +5,7 @@ import format from "format-duration";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCurrSong, setIsPlayAudio } from "../stores/Slices/setIDSlice";
+import { setCurrSong, setIsPlayAudio, setRecentPlayedSong } from "../stores/Slices/setIDSlice";
 import AlbumLoading from "../components/Loading/albumLoading";
 
 const ZingChart = styled.div`
@@ -278,6 +278,8 @@ const ZingChartSong = () => {
   }, [isShowFull,songChartData]);
 
   const handleSong = (item) => {
+    const {thumbnailM,title,encodeId,artists,duration} = item
+    dispatch(setRecentPlayedSong({title,encodeId,artists,thumbnailM,duration}))
     dispatch(setCurrSong(item.encodeId));
     dispatch(setIsPlayAudio(true));
   };

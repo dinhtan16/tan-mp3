@@ -4,7 +4,7 @@ import { NavLink, Outlet, useParams,Link } from "react-router-dom";
 import styled from "styled-components";
 import format from 'format-duration'
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrSong, setIsPlayAudio } from "../stores/Slices/setIDSlice";
+import { setCurrSong, setIsPlayAudio, setRecentPlayedSong } from "../stores/Slices/setIDSlice";
 import AlbumLoading from "../components/Loading/albumLoading";
 
 
@@ -250,6 +250,8 @@ const ZingChartWeek = ({ weekChart,isLoading }) => {
   const isActive = useSelector(state => state.setID.isActiveTab)
   const dispatch = useDispatch()
   const handleSong = (item) => {
+    const {thumbnailM,title,encodeId,artists,duration} = item
+    dispatch(setRecentPlayedSong({title,encodeId,artists,thumbnailM,duration}))
     dispatch(setCurrSong(item.encodeId));
     dispatch(setIsPlayAudio(true));
   };

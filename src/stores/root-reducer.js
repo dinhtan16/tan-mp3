@@ -20,7 +20,7 @@ const bannerConfig = {
 const setIDConfig = {
   ...persistConfig,
   key:'setID',
-  whitelist:['currSongID','currAlbumID','atAlbum','recentSong']
+  whitelist:['currSongID','currAlbumID','atAlbum','recentAlbumId','recentPlayedSong']
 }
 const playlistConfig = {
   ...persistConfig,

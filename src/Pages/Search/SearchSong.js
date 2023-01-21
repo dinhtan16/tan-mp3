@@ -6,12 +6,15 @@ import format from 'format-duration'
 import { Link } from 'react-router-dom'
 
 import styled from 'styled-components';
-import { setCurrSong, setIsPlayAudio } from '../../stores/Slices/setIDSlice'
+import { setCurrSong, setIsPlayAudio, setRecentPlayedSong } from '../../stores/Slices/setIDSlice'
 import AlbumLoading from '../../components/Loading/albumLoading'
 
 const Song = styled.section`
     height: 480px;
     overflow-y: scroll;
+    @media screen and (min-height:1024px) {
+    height: 905px;
+   }
   .title-list {
     font-size: 1.2rem;
     margin-top: 2rem;
@@ -93,8 +96,10 @@ const SearchSong = () => {
       fetch()
   },[searchData])
   const handleSong = (item) => {
+    const {thumbnailM,title,encodeId,artists,duration} = item
     dispatch(setCurrSong(item.encodeId))
     dispatch(setIsPlayAudio(true))
+    dispatch(setRecentPlayedSong({title,encodeId,artists,thumbnailM,duration}))
   }
   return (
     <Song>

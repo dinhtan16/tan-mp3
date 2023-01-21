@@ -1,10 +1,13 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import styled from "styled-components";
 import {TiFolderDelete} from 'react-icons/ti'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SongItem from "../SongItem/SongItem";
-import { Navigate, useNavigate } from "react-router-dom";
-
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { getDetailPlaylist } from "../../api/getDetailPlaylistAPI";
+import format from "format-duration";
+import { setCurrSong, setIsActiveTab, setIsPlayAudio, setRecentPlayedSong } from "../../stores/Slices/setIDSlice";
+import AlbumLoading from "../Loading/albumLoading";
 
 const SideBarContainer = styled.div`
       background-color: #E5E3DF;
@@ -63,7 +66,7 @@ const SideBarContainer = styled.div`
         margin-top: 10px;
         padding: 10px;
       .album-from{
-        margin-top: 5px;
+        margin: 8px 0;
         font-size: .9rem;
         display: flex;
         gap:5px;
@@ -76,16 +79,133 @@ const SideBarContainer = styled.div`
             overflow: hidden !important;
             text-overflow: ellipsis;
             -webkit-line-clamp: 1;
+            width: 50%;
             cursor: pointer;
         }
       }
     }
+    .album-list,.recent-played{
+      height: 350px;
+      overflow-y: scroll;
+      ::-webkit-scrollbar {
+    width: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+    
+    }
+    .recent-played{
+      height: 500px;
+      @media screen and (min-height:1024px) {
+        height: 980px;
+      }
+    }
 `
+const Song = styled.section`
+  .title-list {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .song-lists {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    cursor: pointer;
+    .song-item {
+      width: 100%;
+      @media screen and (max-width: 1124px) {
+        width: 100%;
+      }
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #d9d7d3;
+      &:hover {
+        background-color: #d9d7d3;
+      }
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 8px;
+      }
+      .left {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        .info-left {
+          display: flex;
+          flex-direction: column;
+          .title {
+            /**Major Properties**/
+            font-size: 0.8rem;
+            font-weight: bold;
+            &:hover{
+              color:#af8f8e;
+
+            }
+          }
+          .artist {
+            font-size: 0.7rem;
+            color: grey;
+            margin-top: 5px;
+            a:hover{
+              text-decoration: underline;
+              color:#af8f8e;
+            }
+          }
+        }
+      }
+      .duration {
+        font-size: 0.8rem;
+        color: grey;
+      }
+    }
+  }
+`;
 const SideBarRight = () => {
   const [isActive,setIsActive] = useState(false)
+  const [relevantAlbum,setRelevantAlbum] = useState([])
+  const [isLoading,setIsLoading] = useState(false)
+
   const recentSongData= useSelector(state => state.playlist.recentSongData)
+  const recentAlbumId= useSelector(state => state.setID.recentAlbumId)
+  const recentPlayedSong = useSelector(state => state.setID.recentPlayedSong)
+  const recentTitle = useSelector(state => state.playlist.recentTitlePlaylist)
+  const recentLink = useSelector(state => state.playlist.recentLink)
+
+  // console.log(relevantAlbum)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   // console.log(recentSongData)
+  // console.log(recentAlbumId)
+  useEffect(() => {
+      const fetch = async () => {
+        setIsLoading(true)
+          const res = await getDetailPlaylist(recentAlbumId)
+          setRelevantAlbum(res?.data?.data?.song?.items)
+          setIsLoading(false)
+
+      }
+      if(recentAlbumId) fetch()
+  },[recentAlbumId])
+  const handleSong = (item) => {
+   
+    dispatch(setCurrSong(item.encodeId))
+    dispatch(setIsPlayAudio(true))
+    dispatch(setIsActiveTab(true))
+  }
   return (
     <SideBarContainer>
       <div className="top-sidebar">
@@ -97,15 +217,97 @@ const SideBarRight = () => {
           <TiFolderDelete size={24}/>
         </div>
       </div>
-      <div className="main-sidebar">
-        <SongItem data={recentSongData && recentSongData} isRightSideBar />
-      </div>
-      <div className="album-next">
-        <h4>Tiếp theo</h4>
-        <div className="album-from">
-          Từ playlist <span className="name-album" onClick={() => navigate(recentSongData?.album?.link.split('.')[0])}>{recentSongData?.album?.title}</span>
+    {  
+    isActive ? (
+      <div className="recent-played">
+        <Song>
+        {/* <div className="title-list">Bài hát</div> */}
+        <div className="song-lists">
+          {recentPlayedSong &&
+            recentPlayedSong?.map((item) => {
+              return (
+                
+                  <div key={item.encodeId} className="song-item">
+                    <div className="left">
+                      <img src={item.thumbnailM} alt="" />
+                      <div className="info-left">
+                        <span
+                          className="title"
+                          onClick={() => handleSong(item)}
+                        >
+                          {item.title}
+                        </span>
+                        <span className="artist">
+                          {item.artists?.map((item, index) => (
+                            <Link to={item.link} key={index}>
+                              {(index ? ", " : "") + item.name}
+                            </Link>
+                          ))}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="duration">
+                      {format(+item.duration * 1000, { leading: true })}
+                    </div>
+                  </div>
+                
+              );
+            })}
         </div>
+      </Song>
       </div>
+    )
+    : <>
+      <div className="main-sidebar">
+          <SongItem data={recentSongData && recentSongData} isRightSideBar />
+        </div>
+        <div className="album-next">
+        <div className="album-from">
+            Từ playlist <span className="name-album" onClick={() => navigate(recentSongData?.album?.link.split('.')[0])}>{recentSongData?.album?.title}</span>
+          </div>
+          <h4>Tiếp theo</h4>
+          <div className="album-from">
+           Playlist <span className="name-album" onClick={() => navigate(recentLink)}>{recentTitle && recentTitle}</span>
+          </div>
+          <div className="album-list">
+          <Song>
+            {/* <div className="title-list">Bài hát</div> */}
+            <div className="song-lists">
+              {isLoading ? <AlbumLoading /> :
+                relevantAlbum?.map((item) => {
+                  return (
+                    
+                      <div key={item.encodeId} className="song-item">
+                        <div className="left">
+                          <img src={item.thumbnailM} alt="" />
+                          <div className="info-left">
+                            <span
+                              className="title"
+                              onClick={() => handleSong(item)}
+                            >
+                              {item.title}
+                            </span>
+                            <span className="artist">
+                              {item.artists?.map((item, index) => (
+                                <Link to={item.link} key={index}>
+                                  {(index ? ", " : "") + item.name}
+                                </Link>
+                              ))}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="duration">
+                          {format(+item.duration * 1000, { leading: true })}
+                        </div>
+                      </div>
+                    
+                  );
+                })}
+            </div>
+          </Song>
+          </div>
+        </div>
+  </>}
     </SideBarContainer>
   )
 };

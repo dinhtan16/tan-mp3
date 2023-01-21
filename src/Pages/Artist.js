@@ -14,7 +14,7 @@ import { numberFollow } from "../components/customHook/fnNumber";
 import { IoCloseOutline } from "react-icons/io5";
 
 import AlbumLoading from "../components/Loading/albumLoading";
-import { setCurrSong, setIsPlayAudio } from "../stores/Slices/setIDSlice";
+import { setCurrSong, setIsPlayAudio, setRecentPlayedSong } from "../stores/Slices/setIDSlice";
 
 const ArtistPage = styled.div`
   height: 500px;
@@ -866,6 +866,8 @@ const Artist = () => {
 
   const handleSongArtist = (item) => {
     // console.log(item.encodeId)
+    const {thumbnailM,title,encodeId,artists,duration} = item
+    dispatch(setRecentPlayedSong({title,encodeId,artists,thumbnailM,duration}))
     dispatch(setCurrSong(item));
     dispatch(setIsPlayAudio(true));
   };

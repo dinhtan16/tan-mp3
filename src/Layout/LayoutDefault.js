@@ -32,11 +32,14 @@ z-index: 999;
 transition:  transform .2s linear;
 transform: translateX(100%);
 
+/* @media screen and (min-width: 1124px){
+  transform: translateX(100%) !important;
+} */
+
 &.active {
   transform: translateX(0%);
 
 }
-
 `;
 const LayoutDefault = () => {
   const isActiveRight = useSelector(state => state.setID.isActiveRight)

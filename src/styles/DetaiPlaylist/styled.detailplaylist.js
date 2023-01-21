@@ -5,10 +5,10 @@ export const DetailPlaylistContainer = styled.div`
   gap: 1rem;
   padding-top: 2rem;
   /* max-height:calc(3/2); */
-  max-height: 548px;
+  height: 548px;
 
-  @media screen and (min-height:1124px) {
-    height: 968px;
+  @media screen and (min-height:1024px) {
+    height: 920px;
   }
   @media screen and (max-height:500px) {
     height: 210px;

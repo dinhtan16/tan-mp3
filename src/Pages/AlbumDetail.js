@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getPlaylistData } from "../stores/Slices/PlaylistSlice";
+import { getPlaylistData, setRecentLink, setRecentTitle } from "../stores/Slices/PlaylistSlice";
 
 import { toast } from "react-toastify";
 
@@ -18,7 +18,7 @@ import {
   LeftContent,
   RightContent,
 } from "../styles/DetaiPlaylist/styled.detailplaylist";
-import { setAtAlbum, setCurrSong, setIsActiveTab, setIsPlayAudio } from "../stores/Slices/setIDSlice";
+import { setAtAlbum, setCurrSong, setIsActiveTab, setIsPlayAudio, setRecentAlbumId, setRecentPlayedSong } from "../stores/Slices/setIDSlice";
 import { CiMusicNote1 } from "react-icons/ci";
 import { useSelector } from "react-redux";
 import AudioPlaying from "../components/Loading/AudioPlaying";
@@ -29,15 +29,19 @@ const AlbumDetail = () => {
   const isActive = useSelector(state => state.setID.isActiveTab)
   const isPlayAudio = useSelector(state => state.setID.isPlayAudio)
   const songLists = useSelector(state => state.playlist.songData)
-  // console.log(songLists)
+  // console.log(recentLink)
+
   const currSongID = useSelector(state => state.setID.currSongID)
   const [thumbData, setThumbData] = useState([]);
+  // console.log(thumbData)
   // const [songData, setSongData] = useState([]);
   const [songOuter, setSongOuter] = useState([]);
 
   const [artistData, setArtistData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
+    dispatch(setRecentAlbumId(id))
+
     const fetchDetailAlbumPlaylist = async () => {
       try {
         setIsLoading(true)
@@ -46,6 +50,8 @@ const AlbumDetail = () => {
         const { data } = res?.data; //lay data banner
         // console.log(data);
         setThumbData(data);
+        dispatch(setRecentTitle(data?.title))
+        dispatch(setRecentLink(data?.link.split('.')[0]))
         const {
           data: { artists },
         } = res?.data; //lay data banner
@@ -73,8 +79,8 @@ const AlbumDetail = () => {
 
 
   const handleSong = (item) => {
-
-
+    const {thumbnailM,title,encodeId,artists,duration} = item
+    dispatch(setRecentPlayedSong({title,encodeId,artists,thumbnailM,duration}))
     dispatch(setCurrSong(item?.encodeId));
     dispatch(setIsPlayAudio(true));
 
