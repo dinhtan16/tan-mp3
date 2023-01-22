@@ -54,7 +54,7 @@ const ZingChart = styled.div`
   .weekChart {
     margin-top: 20px;
       h1{
-        color:#844D4D;
+        color:${props => props.theme.buttonBgr};
       }
     .weekchart-grid {
       display: flex;
@@ -68,11 +68,12 @@ const ZingChart = styled.div`
             width: 50%;
         }
         /* min-width: 30%; */
-        background-color: rgba(255,255,255,0.5);
+        background-color: ${props => props.theme.chartSongBgr};
         border-radius: 8px;
         padding:20px;
         h2{
-        color:#844D4D;
+          color:${props => props.theme.buttonBgr};
+
 
         }
         .rank-item{
@@ -114,7 +115,7 @@ const ZingChart = styled.div`
                 padding: 10px;
                 border-bottom: 1px solid #d9d7d3;
                 &:hover {
-                  background-color: #d9d7d3;
+                  background-color: ${props => props.theme.hover};
                 }
                 img {
                   width: 50px;
@@ -208,7 +209,7 @@ const Song = styled.section`
       padding: 10px;
       border-bottom: 1px solid #d9d7d3;
       &:hover {
-        background-color: #d9d7d3;
+        background-color: ${props => props.theme.hover};
       }
       img {
         width: 50px;

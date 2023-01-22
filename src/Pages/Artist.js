@@ -47,11 +47,12 @@ const ArtistTop = styled.section`
   .img-cover {
     width: 100%;
     min-height: 200px;
+    /* border-radius: 10px; */
   }
   .overlay {
       /* z-index: 1; */
-      border-radius: 10px;
-
+      /* border-radius: 10px; */
+      bottom:4px !important;
       position: absolute;
       inset: 0;
       background-image: linear-gradient(
@@ -164,8 +165,9 @@ const SpotMusic = styled.section`
     /* padding: 0 20px; */
     width: 100%;
     height: fit-content;
-    background-color: #d7d6cf;
+    background-color: ${props => props.theme.hover};
     border-radius: 20px;
+    padding: ${props => props.theme.padding};
     .album-item {
       display: flex;
       align-items: center;
@@ -230,7 +232,7 @@ const SpotMusic = styled.section`
       padding: 10px;
       border-bottom: 1px solid #d9d7d3;
       &:hover {
-        background-color: #d9d7d3;
+        background-color:${props => props.theme.hover};
       }
       img {
         width: 50px;
@@ -670,7 +672,7 @@ const YouLike = styled.div`
         font-weight: bold;
         text-align: center;
         &:hover {
-          color: #644646;
+          color: ${props => props.theme.colorActive};
         }
       }
       .info-follow {
@@ -686,7 +688,7 @@ const YouLike = styled.div`
       outline: none;
       border: none;
       text-transform: uppercase;
-      background-color: #644646;
+      background-color: ${props => props.theme.buttonBgr};
       color: #fff;
       /* height: 50px; */
     }
@@ -724,7 +726,7 @@ const About = styled.section`
     .description {
       .bio {
         line-height: 1.8;
-        color: #828281;
+        color: ${props => props.theme.fontColor};
         font-size: 0.9rem;
       }
       .overlay {
@@ -919,7 +921,7 @@ const Artist = () => {
               <span className="title-album-hot">Album Mới Phát Hành</span>
               <div className="album-spot">
                 {!albumList ? (
-                  <div style={{ backgroundColor: "#E5E3DF" }}>
+                  <div style={{ backgroundColor: "transparent" }}>
                     Hiện nghệ sĩ chưa phát hành album nào gần đây
                   </div>
                 ) : (

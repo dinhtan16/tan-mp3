@@ -18,7 +18,7 @@ export const ActionItem = styled.div`
     content: "";
     width: 40px;
     height: 40px;
-    background-color: #d9d7d3;
+    background-color: ${props => props.theme.sidebar};
 
     z-index: -1;
     border-radius: 50%;

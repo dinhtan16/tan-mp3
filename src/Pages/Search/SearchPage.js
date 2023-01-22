@@ -26,7 +26,7 @@ const SearchPageContainer = styled.div`
         padding: 15px 0;
       }
       a.active {
-        color: #844d4d;
+        color: ${props => props.theme.buttonBgr};
         font-weight: bold;
         /* text-decoration: underline; */
         border-bottom: 1px solid  #844d4d;

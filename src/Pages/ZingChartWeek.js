@@ -47,7 +47,8 @@ const WeekChartTop = styled.div`
       font-size: 3rem;
       font-weight: bold;
       margin-bottom: 20px;
-      color:#844D4D;
+      color:${props => props.theme.buttonBgr};
+
       display: flex;
       align-items: center;
       gap:1rem;
@@ -66,8 +67,8 @@ const WeekChartTop = styled.div`
         padding: 15px 0;
       }
       a.active{
-        color:#844D4D;
-        border-bottom: 2px solid #844D4D ;
+        color:${props => props.theme.buttonBgr};
+        border-bottom: 2px solid ${props => props.theme.buttonBgr} ;
         }
     }
 `
@@ -124,7 +125,7 @@ const WeekChartMain = styled.div`
   .song-main {
     cursor: pointer;
     &:hover {
-      background-color: #d9d7d3;
+      background-color: ${props => props.theme.hover};
     }
     .number-order {
       padding: 0 10px;
@@ -173,7 +174,7 @@ const WeekChartMain = styled.div`
         text-overflow: ellipsis;
         -webkit-line-clamp: 1;
           &:hover {
-            color: #644646;
+           color:${props => props.theme.colorActive};
           }
         }
         .artist {
@@ -194,7 +195,7 @@ const WeekChartMain = styled.div`
           a {
             &:hover {
               color: #644646;
-              margin-left: 2px;
+              /* margin-left: 2px; */
             }
           }
         }

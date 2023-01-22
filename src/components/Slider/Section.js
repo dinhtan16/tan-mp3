@@ -95,7 +95,7 @@ const ThemeBottom = styled.div`
   .description {
     /* flex:1; */
     margin-top: 0.3rem;
-    color: #333;
+    color:${props => props.theme.fontColor};
     font-weight: 300;
     /* min-height: 30px; */
     font-size: 0.8rem;

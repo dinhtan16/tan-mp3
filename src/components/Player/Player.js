@@ -102,7 +102,7 @@ export const SongInfoPlayer = styled.div`
   }
     .artist {
       font-size: 0.8rem;
-      color: #333;
+      color: ${props => props.theme.fontColor};
       overflow-y: scroll;
       height: 30px;
       ::-webkit-scrollbar {
@@ -138,7 +138,7 @@ export const ActionPlayer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #dedad1;
+  background-color: transparent;
   .action-control {
     cursor: pointer;
     /* max-height: 50px; */
@@ -189,7 +189,8 @@ export const ActionPlayer = styled.div`
     .start,
     .end {
       font-size: 0.8rem;
-      color: #333;
+      color: ${props => props.theme.fontColor};
+
     }
     .progress-bar {
       position: relative;
@@ -244,7 +245,7 @@ export const VolumeActionPlayer = styled.div`
     align-items: center;
   }
   .icon.active{
-    background-color: #644646;
+    background-color: ${props => props.theme.buttonBgr};
     color:white;
     border-radius: 2px;
   }

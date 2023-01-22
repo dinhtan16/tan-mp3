@@ -15,18 +15,19 @@ const ButtonStyle = styled.div`
     cursor: pointer;
     border-radius: 20px;
     border: 0.2px solid grey;
+    color: ${props => props.theme.fontColor};
     outline: none;
     padding: 8px 28px;
     background-color: transparent;
     transition: all 0.2s ease;
     &:hover {
-      background-color: #5a3f3f;
+      background-color:${props => props.theme.buttonBgr};
       color: #fff;
       border: 0.2px solid transparent;
     }
     &.active {
-      background-color: #5a3f3f;
-      color: #fff;
+      background-color: ${props => props.theme.buttonBgr};
+      color: ${props => props.theme.fontColor};
       border: 0.2px solid transparent;
     }
   }

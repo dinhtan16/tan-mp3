@@ -54,9 +54,11 @@ const Highlight = styled.section`
     }
     gap: 10px;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.3);
+    /* color: ${props => props.theme.fontColor}; */
+
+    /* background-color: ${props => props.theme.hover}; */
     &:hover {
-      background-color: rgba(255, 255, 255, 0.5);
+      background-color: ${props => props.theme.hover};
     }
     img {
       width: 90px;
@@ -79,7 +81,7 @@ const Highlight = styled.section`
         cursor: pointer;
         margin-top: 5px;
         &:hover{
-          color:#af8f8e;
+          color:${props => props.theme.activeLink};
           
         }
       }
@@ -120,7 +122,7 @@ const Song = styled.section`
       padding: 10px;
       border-bottom: 1px solid #d9d7d3;
       &:hover {
-        background-color: #d9d7d3;
+        background-color: ${props => props.theme.hover};
       }
       img {
         width: 50px;
@@ -139,7 +141,7 @@ const Song = styled.section`
             font-size: 0.8rem;
             font-weight: bold;
             &:hover{
-              color:#af8f8e;
+              color:${props => props.theme.colorActive};
 
             }
           }

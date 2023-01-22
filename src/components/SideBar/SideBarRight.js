@@ -10,7 +10,7 @@ import { setCurrSong, setIsActiveTab, setIsPlayAudio, setRecentPlayedSong } from
 import AlbumLoading from "../Loading/albumLoading";
 
 const SideBarContainer = styled.div`
-      background-color: #E5E3DF;
+      background-color:  ${props => props.theme.sidebar};
       height: calc(100vh - 90px);
       box-shadow: -4px -3px 6px -1px rgba(0,0,0,0.12);
       -webkit-box-shadow: -4px -3px 6px -1px rgba(0,0,0,0.12);
@@ -23,7 +23,7 @@ const SideBarContainer = styled.div`
       justify-content: space-between;
       .button-right{
         /* height: 100%; */
-        background-color: #d9d7d4;
+        background-color: ${props => props.theme.sidebar};
         padding: 5px 15px;
         border-radius: 999px;
         display: flex;
@@ -35,17 +35,17 @@ const SideBarContainer = styled.div`
           border:none;
           outline: none;
           font-size: 0.79rem;
-          color:#78787d;
+          color:${props => props.theme.fontColor};
           padding: 8px;
           width: 105px;
           &:hover{
-            color:#966868;
+            color:${props => props.theme.buttonBgr};
           }
         }
         button.active{
           background-color: rgba(255,255,255,0.5);
           border-radius: 999px;
-          color:#966868;
+          color:${props => props.theme.rightColor};
           font-weight: 500;
         }
       }
@@ -72,7 +72,7 @@ const SideBarContainer = styled.div`
         gap:5px;
         color:#78787d;
         .name-album{
-          color:#966868;
+          color: ${props => props.theme.fontColor};
           -webkit-box-orient: vertical;
             display: block;
             display: -webkit-box;
@@ -133,7 +133,7 @@ const Song = styled.section`
       padding: 10px;
       border-bottom: 1px solid #d9d7d3;
       &:hover {
-        background-color: #d9d7d3;
+        background-color: ${props => props.theme.hover};
       }
       img {
         width: 50px;

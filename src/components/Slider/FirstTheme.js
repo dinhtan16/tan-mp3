@@ -70,7 +70,7 @@ const ThemeBottom = styled.div`
   }
   .description {
     margin-top: 0.3rem;
-    color: #333;
+    color:${props => props.theme.fontColor};
     font-weight: 300;
     font-size: 0.8rem;
     display: -webkit-box;

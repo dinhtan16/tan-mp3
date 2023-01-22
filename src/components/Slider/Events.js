@@ -126,14 +126,14 @@ const EventSlide = styled.div`
     padding: 0 5px;
   }
   .congrats{
-    background-color: #5a3f3f;
+    background-color:  ${props => props.theme.buttonBgr};
     /* padding: 10px; */
     padding:10px 20px;
     border-radius: 999px;
         display: flex;
         align-items: center;
         justify-content: center;
-    color: #fff;
+    color: ${props => props.theme.fontColor};
     cursor: pointer;
     span{
         font-size: 0.8rem;

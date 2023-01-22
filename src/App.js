@@ -32,7 +32,7 @@ export  function useWindowDimensions() {
 }
 function App() {
   const { height, width } = useWindowDimensions();
- 
+
   return(
     width < 700 ? (
     <Sorry />

@@ -181,7 +181,7 @@ const AlbumDetail = () => {
                       borderRadius: 20,
                       outline: "none",
                       border: "none",
-                      backgroundColor: "#5A3F3F",
+                      // backgroundColor: "#5A3F3F",
                       color: "white",
                       fontWeight: 500,
                     }}
@@ -203,7 +203,7 @@ const AlbumDetail = () => {
             </div>
           </LeftContent>
           <RightContent>
-            <div className="description" style={{color:'#333',fontSize:'0.96rem',padding:'0 20px',textAlign:'justify'}}>{thumbData?.description}</div>
+            <div className="description" style={{fontSize:'0.96rem',padding:'0 20px',textAlign:'justify'}}>{thumbData?.description}</div>
             <div className="song-container">
               <div className="title">
                 <div className="icon-title">

@@ -164,7 +164,7 @@ export const LeftContent = styled.div`
     }
     .update {
       margin: 0.5rem 0;
-      color: #333;
+    color: ${props => props.theme.fontColor};
       font-size: 0.9rem;
     }
     .artist-content {
@@ -174,14 +174,14 @@ export const LeftContent = styled.div`
       font-size: 1rem;
       font-weight: 600;
       &:hover {
-        color: #5a3f3f;
+        color:  ${props => props.theme.buttonBgr};
         text-decoration: underline;
       }
     }
     .artist-content .name .follow {
       user-select: none;
       font-size: 0.5rem;
-      color: #333;
+      color:  ${props => props.theme.fontColor};
       font-size: 0.9rem;
       margin-bottom: 0.5rem;
       /* margin-top: 0.5rem; */
@@ -194,6 +194,8 @@ export const LeftContent = styled.div`
         display: flex;
         justify-content: center;
         button {
+          background-color: ${props => props.theme.buttonBgr};
+
           cursor: pointer;
           display: flex;
           align-items: center !important;
@@ -277,6 +279,9 @@ export const ArtistLeftContent = styled.div`
 
 export const RightContent = styled.div`
   flex: 1;
+  .description{
+    color: ${props => props.theme.fontColor};
+  }
   .song-container {
     margin-top: 1rem;
     display: flex;
@@ -291,11 +296,12 @@ export const RightContent = styled.div`
     height: 90%;
     z-index: 9999;
   }
+
   .title {
     user-select: none;
     display: flex;
     font-weight: 700;
-    color: #333;
+    color:  ${props => props.theme.fontColor};
 
     /* justify-content: space-around; */
     padding: 10px;
@@ -322,7 +328,7 @@ export const RightContent = styled.div`
   .song-main {
     cursor: pointer;
     &:hover {
-      background-color: #d9d7d3;
+      background-color: ${props => props.theme.hover};
     }
     .icon {
       min-width: 4%;
@@ -350,12 +356,12 @@ export const RightContent = styled.div`
           width: 80%;
           line-height: 1.2;
           &:hover {
-            color: #644646;
+            color:  ${props => props.theme.colorActive};
           }
         }
         .artist {
           font-weight: 300;
-          color: #333;
+          color:  ${props => props.theme.fontColor};
           font-size: 0.9rem;
           margin-top: 0.3rem;
           max-width: 70%;
@@ -364,7 +370,7 @@ export const RightContent = styled.div`
           }
           a {
             &:hover {
-              color: #644646;
+              color:  ${props => props.theme.colorActive};
               margin-left: 2px;
             }
           }
@@ -386,7 +392,7 @@ export const RightContent = styled.div`
       a {
         font-size: 0.9rem;
         font-weight: 300;
-        color: #333;
+        color:  ${props => props.theme.fontColor};
         &:hover {
           color: #644646;
         }

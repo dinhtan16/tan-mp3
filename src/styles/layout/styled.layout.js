@@ -9,7 +9,7 @@ export const TopStyle = styled.div`
 
 padding: 0 59px;
 height: 60px;
-background-color: #e5e3df; 
+/* background-color: #e5e3df;  */
 `;
 
 export const LeftSidebarStyle = styled.div`
@@ -22,7 +22,7 @@ export const LeftSidebarStyle = styled.div`
 export const MidBarStyle = styled.div`
 min-height: calc(100% - 158px);
   /* height: calc(100vh - 72px); */
-  background-color: #E5E3DF;
+  /* background-color: #E5E3DF; */
   flex:1;
   display: flex;
   /* height: 100%; */
@@ -41,6 +41,6 @@ position: fixed;
 bottom: 0;
 right: 0;
 left: 0;
-background-color: #dedad1;
+/* background-color: #dedad1; */
 z-index: 9999;
 `

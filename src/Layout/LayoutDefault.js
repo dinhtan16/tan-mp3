@@ -17,7 +17,8 @@ import {
 
 } from "../styles/layout/styled.layout";
 
-  
+import { ThemeProvider } from "styled-components";
+import { lightTheme,darkTheme ,GlobalStyles} from "../styles/themes";
 
 
 const RightSidebarStyle = styled.div`
@@ -41,32 +42,43 @@ transform: translateX(100%);
 
 }
 `;
+
+const StyledApp = styled.div`
+`
 const LayoutDefault = () => {
   const isActiveRight = useSelector(state => state.setID.isActiveRight)
  
-
+  const [theme,setTheme] = useState('dark')
+  const ThemeToggler = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light')
+  }
  
   return (
-    <DefaultLayout>
-      <LayoutContainer>
-        <LeftSidebarStyle>
-          <SideBarLeft />
-        </LeftSidebarStyle>
-        <MidBarStyle>
-              <TopStyle>
-                <Header />
-              </TopStyle>
-                        <RouteLayout />
-              <PlayerStyle>
-              <Player />
-            </PlayerStyle>  
-        </MidBarStyle>
-        <RightSidebarStyle className={isActiveRight ? 'active' :''}>
-          <SideBarRight />
-        </RightSidebarStyle>
-      </LayoutContainer>
-     
-    </DefaultLayout>
+  <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+    <GlobalStyles />
+    <StyledApp>
+        <DefaultLayout>
+          <LayoutContainer>
+            <LeftSidebarStyle>
+              <SideBarLeft />
+            </LeftSidebarStyle>
+            <MidBarStyle>
+                  <TopStyle>
+                    <Header handleTheme={ThemeToggler} isTheme={theme}/>
+                  </TopStyle>
+                            <RouteLayout />
+                  <PlayerStyle>
+                  <Player />
+                </PlayerStyle>  
+            </MidBarStyle>
+            <RightSidebarStyle className={isActiveRight ? 'active' :''}>
+              <SideBarRight />
+            </RightSidebarStyle>
+          </LayoutContainer>
+         
+        </DefaultLayout>
+    </StyledApp>
+  </ThemeProvider>
   );
 };
 

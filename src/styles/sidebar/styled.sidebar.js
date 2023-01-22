@@ -3,16 +3,16 @@ import { NavLink } from "react-router-dom";
 
 export const NavbarLink = styled(NavLink)`
   &.active {
-    background-color: #ceccc9;
-    color: #936766;
-    border-left: 5px solid #936766;
+    background-color: ${props => props.theme.activeNav};
+    color: ${props => props.theme.colorActive};
+    border-left: 5px solid ${props => props.theme.buttonBgr};
   }
 `;
 export const SideLeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   /* padding: 1rem; */
-  background-color: #d9d7d4;
+  background-color: ${props => props.theme.sidebar};
   /* height: 1000vh; */
   /* position: relative; */
   /* height: 100%; */
@@ -37,7 +37,7 @@ export const MainMenu = styled.div`
     border-left: 5px solid transparent;
 
     &:hover {
-      color: #936766;
+      color: ${props => props.theme.buttonBgr};
     }
     .icon-nav {
       font-size: 1.3rem;

@@ -19,10 +19,10 @@ const SongItemStyle = styled.div`
     cursor: pointer;
     padding: 10px;
     &:hover {
-      background-color: #d9d7d3;
+      background-color: ${props => props.theme.hover};
     }
     &.active {
-      background-color: #644646;
+      background-color: ${props => props.theme.buttonBgr};
       color: #fff;
       border-radius: 10px;
     }

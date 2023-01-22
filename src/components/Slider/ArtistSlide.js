@@ -73,7 +73,7 @@ const Artists = styled.div`
         outline: none;
         border: none;
         text-transform: uppercase;
-        background-color: #644646;
+        background-color: ${props => props.theme.buttonBgr};
         color: #fff;
         /* height: 50px; */
       }

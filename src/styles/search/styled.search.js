@@ -24,14 +24,16 @@ export const SearchInput = styled.input`
   outline: 0;
   padding: 1rem 2.3rem;
   font-size: 0.9rem;
-  background-color: #d9d7d4;
+  background-color: ${props => props.theme.sidebar};
   font-family: inherit;
+  color: ${props => props.theme.fontColor};
 
   &:focus {
-    background-color: #fff;
+    background-color: transparent;
+    border:1px solid ${props => props.theme.buttonBgr} ;
   }
   &::placeholder {
-    color: #333;
+    color: ${props => props.theme.fontColor};
   }
 `;
 export const SearchIcon = styled.div`
