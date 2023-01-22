@@ -46,7 +46,8 @@ const ArtistTop = styled.section`
   width: 100%;
   .img-cover {
     width: 100%;
-    min-height: 200px;
+    height:330px;
+    object-fit: cover;
     /* border-radius: 10px; */
   }
   .overlay {
