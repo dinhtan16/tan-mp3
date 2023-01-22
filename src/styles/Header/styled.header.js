@@ -12,7 +12,7 @@ export const HeaderContainer = styled.div`
     gap:1rem;
     cursor: pointer;
     .toggle{
-      padding: 8px 20px;
+      padding: 5px;
       border-radius: 9999px;
       outline: 0;
       border:1px solid ${props => props.theme.Mode};

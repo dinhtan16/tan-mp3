@@ -19,12 +19,10 @@ const Header = ({handleTheme,isTheme}) => {
         <GrFormNextLink  size={28}className='icon' onClick={() => navigate(1)}/>
         <button className="toggle" onClick={handleTheme}>{isTheme === 'dark' ? 
         <div className="flex-center">
-          <span>Light Mode</span>
-          <MdLightMode size={18}/>
+          <MdLightMode size={24}/>
 
         </div> : <div className="flex-center">
-          <span>Dark Mode</span>
-          <MdDarkMode size={18}/>
+          <MdDarkMode size={24}/>
 
         </div>}</button>
         {/* <Switch onChange={() => handleTheme()} checked={isTheme}  offColor={isTheme === 'dark' ? '#888' : 'red'}/> */}
