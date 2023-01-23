@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
-import { NavLink, Outlet, useParams,Link } from "react-router-dom";
+import { NavLink, useParams,Link } from "react-router-dom";
 import styled from "styled-components";
 import format from 'format-duration'
 import { useDispatch, useSelector } from "react-redux";
@@ -285,14 +285,6 @@ const ZingChartWeek = ({ weekChart,isLoading }) => {
       </WeekChartTop>
       <WeekChartMain>
       <div className="song-container">
-              {/* <div className="title">
-                <div className="icon-title">
-                  <MdSwapVert />
-                </div>
-                <div className="title-name">Bài hát</div>
-                <div className="title-album">Album</div>
-                <div className="time-title">Thời gian</div>
-              </div> */}
               <div>
                 {isLoading ? <AlbumLoading /> : weekChart?.find(item => item?.link?.includes(id))?.items.map((item, i) => {
                   const link = item.album?.link.split(".")[0];
