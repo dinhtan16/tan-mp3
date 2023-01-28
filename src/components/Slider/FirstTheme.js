@@ -65,7 +65,7 @@ const ThemeBottom = styled.div`
     font-weight: bold;
 
     &:hover {
-      color: #844d4d;
+      color:${props => props.theme.hoverTitle};
     }
   }
   .description {

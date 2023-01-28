@@ -179,7 +179,7 @@ const WeekChartMain = styled.div`
         }
         .artist {
           font-weight: 300;
-          color: #333;
+          color: ${props => props.theme.fontColor};
           font-size: 0.9rem;
           margin-top: 0.3rem;
           max-width: 70%;
@@ -216,7 +216,7 @@ const WeekChartMain = styled.div`
       a {
         font-size: 0.9rem;
         font-weight: 300;
-        color: #333;
+        color: ${props => props.theme.fontColor};
         -webkit-box-orient: vertical;
         display: block;
         display: -webkit-box;
@@ -261,7 +261,7 @@ const ZingChartWeek = ({ weekChart,isLoading }) => {
       <WeekChartTop>
         <div className="title-week"><span> Bảng xếp hạng tuần</span> <AiFillPlayCircle /></div>
         <div className="nav-link">
-          {weekChart?.map((item, i) => {
+          {weekChart?.map((item) => {
             return (
               <NavLink
               key={item.chartId}

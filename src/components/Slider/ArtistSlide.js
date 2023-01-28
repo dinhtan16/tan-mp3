@@ -57,7 +57,7 @@ const Artists = styled.div`
           font-weight: bold;
           text-align: center;
           &:hover{
-            color:#644646;
+            color:${props => props.theme.hoverTitle};
           }
         }
         .info-follow {

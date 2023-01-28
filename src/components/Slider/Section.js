@@ -89,7 +89,7 @@ const ThemeBottom = styled.div`
     text-align: center;
     /* height: 30px; */
     &:hover {
-      color: #844d4d;
+      color:${props => props.theme.hoverTitle};
     }
   }
   .description {

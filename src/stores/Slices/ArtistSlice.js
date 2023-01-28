@@ -37,13 +37,6 @@ const ArtistSlice = createSlice({
   },
 });
 
-// export const { getHomeData } = homeDataSlice.actions;
+
 export default ArtistSlice.reducer;
-// extraReducers: {
-//   [getHomeData.pending]: (state, action) => {
-//       console.log('pending')
-//   },
-//   [getHomeData.fulfilled]: (state, action) => {
-//       console.log('success')
-//   },
-// },
+

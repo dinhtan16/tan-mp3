@@ -13,7 +13,8 @@ export const lightTheme = {
     padding:'0px',
     chartSongBgr:'rgba(255,255,255,0.5)',
     Mode:'#355ED7',
-    colorMode:'#fff'
+    colorMode:'#fff',
+    hoverTitle:'#844D4D'
 
 }
 
@@ -33,7 +34,9 @@ export const darkTheme = {
     padding:'10px',
     chartSongBgr:'#22354e',
     Mode:'#fff',
-    colorMode:'#355ED7'
+    colorMode:'#355ED7',
+    hoverTitle:'#fff'
+
 
 }
 

@@ -43,21 +43,23 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
-  
-    dispatch(getHomeData());
-     dispatch(getTheme1Data());
-      dispatch(getArtistSlide());
-    dispatch(getNewMusicEveryDay());
-      dispatch(getTopHundred());
-   dispatch(getHXone());
-     dispatch(getHAlbum());
-     dispatch(getNewRelease());
-   dispatch(getWeekChart());
-   dispatch(getEvent());
-      dispatch(getChart())
-      dispatch(getArtistSpot())
-    
-  
+    setIsLoading(true);
+    const fetch = async () => {
+      await dispatch(getWeekChart());
+       dispatch(getHomeData());
+       dispatch(getTheme1Data());
+       dispatch(getArtistSlide());
+       dispatch(getNewMusicEveryDay());
+       dispatch(getTopHundred());
+       dispatch(getHXone());
+       dispatch(getHAlbum());
+       dispatch(getNewRelease());
+        dispatch(getEvent());
+       dispatch(getChart());
+       dispatch(getArtistSpot());
+      setIsLoading(false);
+    };
+    fetch();
   }, []);
 
   const banner = useSelector((state) => state.homeData.banner);
@@ -70,23 +72,13 @@ const Home = () => {
   const newRelease = useSelector((state) => state.homeData.newRelease);
   const weekChart = useSelector((state) => state.homeData.weekChart);
   const events = useSelector((state) => state.homeData.eventSlide);
-  const artistSpot = useSelector(state => state.homeData.artistSpot)
+  const artistSpot = useSelector((state) => state.homeData.artistSpot);
   // const charts = useSelector((state) => state.homeData.chart);
 
   // console.log(events.items)
   // console.log(xone)
 
   // const banner = homeData?.find(item => item.sectionType === "banner")
-
-  useEffect(() => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => {
-      clearTimeout();
-    };
-  }, []);
 
   return isLoading ? (
     <Loading />
@@ -101,15 +93,15 @@ const Home = () => {
           title={artistSlide?.title}
           className="section-item"
         />
-          <ArtistSlide data={artistSpot?.items} title={artistSpot?.title}/>
-         
+        <ArtistSlide data={artistSpot?.items} title={artistSpot?.title} />
+
         <Section
           data={musicEveryday?.items}
           title={musicEveryday?.title}
           className="section-item"
         />
         <NewRelease data={newRelease?.items} title={newRelease?.title} />
-        <Chart/>
+        <Chart />
         <WeekChart data={weekChart?.items} />
         <Section
           data={topHundred?.items}

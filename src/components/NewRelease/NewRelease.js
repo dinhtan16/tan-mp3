@@ -27,7 +27,7 @@ const ButtonStyle = styled.div`
     }
     &.active {
       background-color: ${props => props.theme.buttonBgr};
-      color: ${props => props.theme.fontColor};
+      color: #fff;
       border: 0.2px solid transparent;
     }
   }

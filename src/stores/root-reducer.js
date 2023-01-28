@@ -12,10 +12,10 @@ const persistConfig = {
   storage,
   stateReconciler: autoMergeLevel2,
 };
-const bannerConfig = {
+const homeConfig = {
     ...persistConfig,
     key:'homeData',
-    whitelist:['banner','theme','musicEveryday','topHundred','xone' ,'hAlbum','artistHome','newRelease']
+    whitelist:['banner','theme','musicEveryday','topHundred','xone' ,'hAlbum','artistHome','newRelease','weekChart']
 }
 const setIDConfig = {
   ...persistConfig,
@@ -33,7 +33,7 @@ const searchResultConfig = {
   whitelist:['searchData','keyword','artistData']
 }
 const rootReducer = combineReducers({
-  homeData: persistReducer(bannerConfig,homeDataReducer),
+  homeData: persistReducer(homeConfig,homeDataReducer),
   setID:persistReducer(setIDConfig,setIDReducer),
   playlist:persistReducer(playlistConfig,PlaylistReducer),
   search:persistReducer(searchResultConfig,searchReducer),

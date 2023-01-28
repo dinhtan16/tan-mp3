@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,Suspense } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Header from "../components/Header/Header";
 import Player from "../components/Player/Player";
 import SideBarLeft from "../components/SideBar/SideBarLeft";
-import SideBarRight from "../components/SideBar/SideBarRight";
+// import SideBarRight from "../components/SideBar/SideBarRight";
 import Welcome from "../components/Welcome/Welcome";
 import RouteLayout from "../routes/route";
 import {
@@ -14,13 +14,15 @@ import {
   DefaultLayout,
   PlayerStyle,
   TopStyle,
-
+  
 } from "../styles/layout/styled.layout";
 
 import { ThemeProvider } from "styled-components";
 import { lightTheme,darkTheme ,GlobalStyles} from "../styles/themes";
+import AlbumLoading from "../components/Loading/albumLoading";
 
 
+const SideBarRight = React.lazy(() => import('../components/SideBar/SideBarRight'));
 const RightSidebarStyle = styled.div`
 width: 330px;
 /* display: none; */
@@ -72,7 +74,7 @@ const LayoutDefault = () => {
                 </PlayerStyle>  
             </MidBarStyle>
             <RightSidebarStyle className={isActiveRight ? 'active' :''}>
-              <SideBarRight />
+             <Suspense fallback={<AlbumLoading />}> <SideBarRight /></Suspense>
             </RightSidebarStyle>
           </LayoutContainer>
          
