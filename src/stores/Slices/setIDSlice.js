@@ -8,7 +8,7 @@ const songSlice = createSlice({
     isPlayAudio: false,
     atAlbum: false,
     isActiveTab: null,
-    isActiveRight: false,
+    isActiveRight: true,
     isLoadingAlbum: false,
     recentAlbumId:null,
     recentPlayedSong:[]
