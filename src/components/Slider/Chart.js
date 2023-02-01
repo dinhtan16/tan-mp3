@@ -123,7 +123,7 @@ const SectionChart = styled.div`
   z-index: 90;
   color: white;
 `;
-const ChartHome = ({disableItem}) => {
+const ChartHome = ({disableItem,isLoading}) => {
   const navigate=useNavigate()
   // console.log(disableItem)
   const dataChart = useSelector((state) => state.homeData.chart);
@@ -168,11 +168,11 @@ const ChartHome = ({disableItem}) => {
   }, [chart]);
 //   console.log(rank)
   return (
-    <Container>
+  isLoading ? <span style={{fontWeight:'bold'}}>Đang tải Bảng Xếp Hạng...</span> :  <Container>
       <div className={disableItem ? "alpha yellow" : "alpha"}></div>
       <div className={disableItem ? "bg-blur yellow" : "bg-blur"}></div>
       <div className={disableItem && "alpha-1"}></div>
-      <SectionChart>
+     <SectionChart>
         <div style={{ fontWeight: 700, fontSize: "1.4rem" }}>#zingchart</div>
         <ChartContainer className={disableItem ? "container dblock"  : "container"}>
           <div className="ranking">

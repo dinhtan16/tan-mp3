@@ -50,7 +50,7 @@ const StyledApp = styled.div`
 const LayoutDefault = () => {
   const isActiveRight = useSelector(state => state.setID.isActiveRight)
  
-  const [theme,setTheme] = useState('dark')
+  const [theme,setTheme] = useState('light')
   const ThemeToggler = () => {
     theme === 'light' ? setTheme('dark') : setTheme('light')
   }

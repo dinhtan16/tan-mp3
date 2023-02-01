@@ -106,7 +106,7 @@ useEffect(() => {
 },[window.innerWidth])
   return (
     <div className="margin" style={{marginTop:30,marginBottom:20}}>
-      <h3 style={{ marginBottom: "1rem",marginTop:48}}>Xuân mang Tết đến</h3>
+      <h3 style={{ marginBottom: "1rem",marginTop:48}}>{data.title}</h3>
       <ThemeContainer>
         {dataSection?.map((item, i) => {
           const linkCut = item.link.split(".")[0]

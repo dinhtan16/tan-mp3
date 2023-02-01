@@ -41,6 +41,9 @@ const SectionStyle = styled.div`
 `;
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingArtist, setIsLoadingArtist] = useState(false);
+  const [isLoadingChart, setIsLoadingChart] = useState(false);
+
   const dispatch = useDispatch();
   useEffect(() => {
     setIsLoading(true);
@@ -48,20 +51,35 @@ const Home = () => {
       await dispatch(getWeekChart());
        dispatch(getHomeData());
        dispatch(getTheme1Data());
-       dispatch(getArtistSlide());
        dispatch(getNewMusicEveryDay());
        dispatch(getTopHundred());
        dispatch(getHXone());
        dispatch(getHAlbum());
        dispatch(getNewRelease());
         dispatch(getEvent());
-       dispatch(getChart());
        dispatch(getArtistSpot());
       setIsLoading(false);
     };
     fetch();
   }, []);
-
+  useEffect(() => {
+    setIsLoadingArtist(true)
+    const fetchArtist = async () => {
+    await dispatch(getArtistSlide());
+      setIsLoadingArtist(false)
+    }
+    fetchArtist()
+  }, [])
+  useEffect(() => {
+    setIsLoadingChart(true);
+    const fetch = async () => {
+    
+      await dispatch(getChart());
+     
+      setIsLoadingChart(false);
+    };
+    fetch();
+  }, []);
   const banner = useSelector((state) => state.homeData.banner);
   const theme = useSelector((state) => state.homeData.theme);
   const artistSlide = useSelector((state) => state.homeData.artistHome);
@@ -93,7 +111,7 @@ const Home = () => {
           title={artistSlide?.title}
           className="section-item"
         />
-        <ArtistSlide data={artistSpot?.items} title={artistSpot?.title} />
+       <ArtistSlide data={artistSpot?.items} title={artistSpot?.title} isLoadingArtist={isLoadingArtist}/>
 
         <Section
           data={musicEveryday?.items}
@@ -101,7 +119,7 @@ const Home = () => {
           className="section-item"
         />
         <NewRelease data={newRelease?.items} title={newRelease?.title} />
-        <Chart />
+        <Chart isLoading={isLoadingChart}/>
         <WeekChart data={weekChart?.items} />
         <Section
           data={topHundred?.items}

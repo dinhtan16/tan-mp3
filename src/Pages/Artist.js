@@ -71,10 +71,10 @@ const Artist = () => {
   // console.log(artistData?.awards.length)
 
   const handleSongArtist = (item) => {
-    // console.log(item.encodeId)
+    // console.log(item)
     const {thumbnailM,title,encodeId,artists,duration} = item
     dispatch(setRecentPlayedSong({title,encodeId,artists,thumbnailM,duration}))
-    dispatch(setCurrSong(item));
+    dispatch(setCurrSong(item.encodeId));
     dispatch(setIsPlayAudio(true));
   };
   useEffect(() => {
@@ -184,7 +184,7 @@ const Artist = () => {
                           <div className="info-left">
                             <span
                               className="title"
-                              onClick={() => handleSongArtist(item.encodeId)}
+                              onClick={() => handleSongArtist(item)}
                             >
                               {item.title}
                             </span>

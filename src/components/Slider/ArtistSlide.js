@@ -80,13 +80,17 @@ const Artists = styled.div`
     }
   }
 `;
-const ArtistSlide = ({data}) => {
+const ArtistSlide = ({data,isLoadingArtist}) => {
 
     const navigate= useNavigate()
   return (
-    <Artists>
-    <div className="artist-title">Nghệ sĩ Nổi Bật</div>
-    <div className="artists-list">
+     <Artists>
+    <div className="artist-title"> Nghệ sĩ Nổi Bật</div>
+    
+
+  {isLoadingArtist ? <div>
+    Đang tải, xin vui lòng chờ
+  </div> :  <div className="artists-list">
       {data?.map((item) => {
         return (
           <div className="artist-item" key={item.id}>
@@ -105,7 +109,7 @@ const ArtistSlide = ({data}) => {
           </div>
         );
       })}
-    </div>
+    </div>}
   </Artists>
   )
 }

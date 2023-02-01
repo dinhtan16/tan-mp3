@@ -774,6 +774,20 @@ export const About = styled.section`
               overflow-y: scroll;
               height: 250px;
               color: #999898;
+              ::-webkit-scrollbar {
+    width: 3px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
             }
             .close {
               position: absolute;

@@ -346,7 +346,7 @@ const Player = () => {
       } else {
         let keys =data && Object.keys(data);
         let audioInfo = data[keys[0]];
-        setAudioData(audioInfo);
+        setAudioData(res?.data.data['128']);
       }
     };
     fetchAudio();
