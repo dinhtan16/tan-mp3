@@ -53,7 +53,10 @@ const RankItemStyle = styled.div`
                 color: #5A3F3F;
             }
         }
-        
+         .info-artist{
+          word-break: break-word;
+         }
+         
     }
   }
 `;
