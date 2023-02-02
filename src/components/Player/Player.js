@@ -80,11 +80,11 @@ export const SongInfoPlayer = styled.div`
    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-       background: rgba(0,0,0,0.2);;
+       background: rgba(0,0,0,0.2);
   }
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: transparent;
+      background: rgba(0,0,0,0.4);
   }
     }
     .artist {
@@ -96,14 +96,14 @@ export const SongInfoPlayer = styled.div`
     width: 3px;
   }
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: rgba(0,0,0,0.2);
   }
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: rgba(0,0,0,0.4);
   }
     }
     a:hover {
