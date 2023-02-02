@@ -71,7 +71,8 @@ export const SongInfoPlayer = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    overflow-x: scroll;
+    a{
+      overflow-x: scroll;
     ::-webkit-scrollbar {
     height:1px;
   }
@@ -85,6 +86,7 @@ export const SongInfoPlayer = styled.div`
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
+    }
     .artist {
       font-size: 0.8rem;
       color: ${props => props.theme.fontColor};
