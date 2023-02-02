@@ -74,17 +74,17 @@ export const SongInfoPlayer = styled.div`
     .info-title-song{
       overflow-x: scroll;
     ::-webkit-scrollbar {
-    height:1px;
+    height:3px;
   }
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+   background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: #888;
+       background: rgba(0,0,0,0.2);;
   }
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: transparent;
   }
     }
     .artist {
