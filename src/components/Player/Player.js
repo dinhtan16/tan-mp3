@@ -71,7 +71,7 @@ export const SongInfoPlayer = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    a{
+    .info-title-song{
       overflow-x: scroll;
     ::-webkit-scrollbar {
     height:1px;
@@ -508,7 +508,7 @@ const Player = () => {
           <img src={songData?.thumbnailM} alt="" />
         </div>
         <div className="song-info">
-          <div style={{ fontWeight: 600}}>
+          <div style={{ fontWeight: 600}} className="info-title-song">
             <Link to={album}>{songData?.title}</Link>
           </div>
           <div
