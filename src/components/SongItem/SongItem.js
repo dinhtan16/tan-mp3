@@ -75,14 +75,14 @@ const SongItemStyle = styled.div`
   }
 `;
 const SongItem = ({ data, isRightSideBar }) => {
-  const {encodeId,title,thumbnailM,artists,duration} = data
+//   const {encodeId,title,thumbnailM,artists,duration} = data
   // console.log(encodeId)
   // const isActiveTab = useSelector((state) => state.setID.isActiveTab);
   // console.log(isActiveTab)
   const dispatch = useDispatch();
   const handleSong = () => {
     // const {thumbnailM,title,encodeId,artists,duration} = item
-    dispatch(setRecentPlayedSong({encodeId,title,thumbnailM,artists,duration}))
+    dispatch(setRecentPlayedSong({encodeId:data.encodeId,title:data.title,thumbnailM:data.thumbnailM,artists:data.artists,duration:data.duration}))
     dispatch(setCurrSong(data?.encodeId))
     dispatch(setIsPlayAudio(true));
   };
