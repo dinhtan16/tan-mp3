@@ -48,22 +48,7 @@ export const SongInfoPlayer = styled.div`
   width: 30%;
   display: flex;
   gap: 0.8rem;
-  overflow-x: scroll;
-  ::-webkit-scrollbar {
-    width: 3px;
-  }
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888;
-  }
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
+ 
   align-items: center;
   /* width: 100%; */
   max-height: 90px;
