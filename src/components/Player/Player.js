@@ -344,9 +344,9 @@ const Player = () => {
         setCurrSecond(0);
         dispatch(setIsPlayAudio(false));
       } else {
-        let keys =data && Object.keys(data);
-        let audioInfo = data[keys[0]];
-        setAudioData(audioInfo);
+//         let keys =data && Object.keys(data);
+//         let audioInfo = data[keys[0]];
+        setAudioData(res?.data.data['128']);
       }
     };
     fetchAudio();
