@@ -146,7 +146,7 @@ const WeekChartMain = styled.div`
 font-size: 1.9rem;
 font-weight: bold;
 min-width: 60px;
-        }
+        
     }
     padding: 10px;
     display: flex;
