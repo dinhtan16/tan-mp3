@@ -2,7 +2,7 @@ import React from 'react'
 
 const Radio = () => {
   return (
-    <div>Radio</div>
+    <div>Chức năng đang phát triển!</div>
   )
 }
 
