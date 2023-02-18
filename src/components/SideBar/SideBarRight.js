@@ -88,7 +88,7 @@ const SideBarContainer = styled.div`
     .album-list,.recent-played{
       /* height: 500px; */
       @media screen and (min-width:1240px) {
-       height: 77%;  
+       height: 72%;  
       }
       @media screen and (max-width:1240px) {
         height: 70%;  
