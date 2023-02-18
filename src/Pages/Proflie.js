@@ -1,7 +1,7 @@
 import React from "react";
 
 const Proflie = () => {
-  return <div>Proflie</div>;
+  return <div>Chức năng đang phát triển!</div>;
 };
 
 export default Proflie;

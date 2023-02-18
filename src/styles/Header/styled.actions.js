@@ -23,4 +23,8 @@ export const ActionItem = styled.div`
     z-index: -1;
     border-radius: 50%;
   }
+  svg{
+  display:block;
+  }
+  
 `;

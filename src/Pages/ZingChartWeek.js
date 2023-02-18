@@ -142,9 +142,11 @@ const WeekChartMain = styled.div`
       color: #de5453;
     }
     #order{
-      padding: 0 10px;
-      font-size: 1.4rem;
-      font-weight: bold;
+     padding: 0px 10px;
+font-size: 1.9rem;
+font-weight: bold;
+min-width: 60px;
+        
     }
     padding: 10px;
     display: flex;

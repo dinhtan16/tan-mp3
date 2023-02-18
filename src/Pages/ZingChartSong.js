@@ -98,10 +98,10 @@ const ZingChart = styled.div`
                 color: #de5453;
               }
               #order {
-                padding: 0 10px;
-                font-size: 1.4rem;
+               padding: 0px 10px;
+                font-size: 1.7rem;
                 font-weight: bold;
-                width: 60px;
+                min-width: 60px;
               }
               cursor: pointer;
               .song-item {

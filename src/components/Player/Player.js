@@ -48,22 +48,7 @@ export const SongInfoPlayer = styled.div`
   width: 30%;
   display: flex;
   gap: 0.8rem;
-  overflow-x: scroll;
-  ::-webkit-scrollbar {
-    width: 3px;
-  }
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888;
-  }
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
+ 
   align-items: center;
   /* width: 100%; */
   max-height: 90px;
@@ -86,20 +71,22 @@ export const SongInfoPlayer = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    overflow-x: scroll;
+    .info-title-song{
+      overflow-x: scroll;
     ::-webkit-scrollbar {
-    height:1px;
+    height:3px;
   }
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+   background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: #888;
+       background: rgba(0,0,0,0.2);
   }
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+      background: rgba(0,0,0,0.4);
   }
+    }
     .artist {
       font-size: 0.8rem;
       color: ${props => props.theme.fontColor};
@@ -109,14 +96,14 @@ export const SongInfoPlayer = styled.div`
     width: 3px;
   }
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: rgba(0,0,0,0.2);
   }
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: rgba(0,0,0,0.4);
   }
     }
     a:hover {
@@ -344,9 +331,15 @@ const Player = () => {
         setCurrSecond(0);
         dispatch(setIsPlayAudio(false));
       } else {
+<<<<<<< HEAD
         let keys =data && Object.keys(data);
         let audioInfo = data[keys[0]];
         setAudioData(audioInfo);
+=======
+//         let keys =data && Object.keys(data);
+//         let audioInfo = data[keys[0]];
+        setAudioData(res?.data.data['128']);
+>>>>>>> 63cea331ca915d628734ca67f1ab7ed42420c93a
       }
     };
     fetchAudio();
@@ -521,7 +514,7 @@ const Player = () => {
           <img src={songData?.thumbnailM} alt="" />
         </div>
         <div className="song-info">
-          <div style={{ fontWeight: 600}}>
+          <div style={{ fontWeight: 600}} className="info-title-song">
             <Link to={album}>{songData?.title}</Link>
           </div>
           <div
