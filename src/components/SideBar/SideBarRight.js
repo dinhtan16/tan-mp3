@@ -10,8 +10,8 @@ import { setCurrSong, setIsActiveTab, setIsPlayAudio, setRecentPlayedSong } from
 import AlbumLoading from "../Loading/albumLoading";
 
 const SideBarContainer = styled.div`
-      background-color:  ${props => props.theme.sidebar};
-      height: calc(100vh - 90px);
+      background-color:  ${props => props.theme.player};
+      height: calc(100vh - 85px);
       box-shadow: -4px -3px 6px -1px rgba(0,0,0,0.12);
       -webkit-box-shadow: -4px -3px 6px -1px rgba(0,0,0,0.12);
       -moz-box-shadow: -4px -3px 6px -1px rgba(0,0,0,0.12);
@@ -65,7 +65,7 @@ const SideBarContainer = styled.div`
     .album-next{
         margin-top: 10px;
         padding: 10px;
-        height: 100%;
+        height: 90%;
       .album-from{
         margin: 8px 0;
         font-size: .9rem;
@@ -86,7 +86,13 @@ const SideBarContainer = styled.div`
       }
     }
     .album-list,.recent-played{
-      height: 70%;
+      /* height: 500px; */
+      @media screen and (min-width:1240px) {
+       height: 77%;  
+      }
+      @media screen and (max-width:1240px) {
+        height: 70%;  
+      }
       overflow-y: scroll;
       ::-webkit-scrollbar {
     width: 3px;

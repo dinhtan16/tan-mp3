@@ -32,12 +32,12 @@ import ArtistSlide from "../components/Slider/ArtistSlide";
 const SectionStyle = styled.div`
   height: 100%;
   margin-top: 6rem;
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
+  display: grid;
+  grid-template-rows: repeat(auto-fit,minmax(300px,1fr));
   gap: 5rem;
-  @media screen and (max-width: 964px) {
-    gap: 3rem;
-  }
+
 `;
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -103,9 +103,9 @@ const Home = () => {
   ) : (
     <HomeContainer>
       <SliderComponent data={banner?.items} />
-      <FirstTheme data={theme?.items} />
       {/* <ArtistSlide data={artistSlide?.items}/> */}
       <SectionStyle>
+      <FirstTheme data={theme?.items} />
         <Section
           data={artistSlide?.items}
           title={artistSlide?.title}

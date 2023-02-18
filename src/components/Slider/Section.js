@@ -3,22 +3,22 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const ThemeContainer = styled.div`
-  /* display: flex; */
+  display: flex;
   gap: 1rem;
-  /* flex-wrap: nowrap; */
+  flex-wrap: nowrap;
   width: 100%;
   /* gap: 1rem; */
-  grid-template-columns: repeat(3, 1fr);
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); */
+  /* grid-auto-flow: column;
+  grid-auto-columns: minmax(200px,1fr); */
+  grid-template-rows: repeat(auto-fit, minmax(50px,1fr));
+  /* @media screen and (min-width:1600px) {
+    grid-template-rows: repeat(auto-fit, minmax(300px,1fr));
   display: grid;
+  } */
   /* justify-content: center; */
-  @media screen and (min-width:880px) {
-    grid-template-columns: repeat(4, 1fr);
-  display: grid;
-  }
-  @media screen and (min-width:1000px) {
-    grid-template-columns: repeat(5, 1fr);
-  display: grid;
-  }
+
 `;
 const ThemeItem = styled.div`
   /* width: 25%; */
@@ -119,7 +119,7 @@ const Section = ({ data,title }) => {
     const navigate = useNavigate()
   // console.log(data)
   const [dataSection,setDataSection] = useState([])
-//   const {title,thumbnailM,link,sortDescription} = data
+  // const {title,thumbnailM,link,sortDescription} = data
 useEffect(() => {
   if(window.innerWidth < 1000){
     const dataCut = data?.slice(0,4)

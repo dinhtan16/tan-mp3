@@ -30,10 +30,11 @@ position: fixed;
 right: 0;
 top: 0;
 bottom: 96px;
-background-color: white;
+/* background-color: white; */
 z-index: 999;
 transition:  transform .2s linear;
 transform: translateX(100%);
+background: ${props => props.theme.player};
 
 /* @media screen and (min-width: 1124px){
   transform: translateX(100%) !important;
