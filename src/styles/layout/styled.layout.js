@@ -41,6 +41,6 @@ position: fixed;
 bottom: 0;
 right: 0;
 left: 0;
-/* background-color: #dedad1; */
+background-color: ${props => props.theme.player};
 z-index: 9999;
 `

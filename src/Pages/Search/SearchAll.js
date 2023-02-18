@@ -9,7 +9,13 @@ import { setCurrSong, setIsPlayAudio, setRecentPlayedSong } from "../../stores/S
 import { numberFollow } from "../../components/customHook/fnNumber";
 
 const SearchAllPage = styled.div`
-  height: 420px;
+  /* height: 420px; */
+  @media screen and (min-width:910px) {
+    height: 73vh;  
+  }
+  @media screen and (max-width:910px) {
+    height: 78vh;  
+  }
   overflow-y: scroll;
   ::-webkit-scrollbar {
     width: 3px;

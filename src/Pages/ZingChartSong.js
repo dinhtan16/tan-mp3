@@ -9,7 +9,12 @@ import { setCurrSong, setIsPlayAudio, setRecentPlayedSong } from "../stores/Slic
 import AlbumLoading from "../components/Loading/albumLoading";
 
 const ZingChart = styled.div`
-  height: 500px;
+    @media screen and (min-width:910px) {
+    height: 73vh;  
+  }
+  @media screen and (max-width:910px) {
+    height: 78vh;  
+  }
   overflow-y: scroll;
   padding: 0 59px;
   ::-webkit-scrollbar {

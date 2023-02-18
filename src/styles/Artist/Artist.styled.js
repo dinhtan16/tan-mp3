@@ -2,7 +2,12 @@ import styled from "styled-components";
 
 
 export const ArtistPage = styled.div`
-  height: 500px;
+  @media screen and (min-width:910px) {
+    height: 73vh;  
+  }
+  @media screen and (max-width:910px) {
+    height: 78vh;  
+  }
   overflow-y: scroll;
   overflow-x: hidden;
   ::-webkit-scrollbar {

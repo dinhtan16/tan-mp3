@@ -10,7 +10,12 @@ import { setCurrSong, setIsPlayAudio, setRecentPlayedSong } from '../../stores/S
 import AlbumLoading from '../../components/Loading/albumLoading'
 
 const Song = styled.section`
-    height: 480px;
+    @media screen and (min-width:910px) {
+    height: 73vh;  
+  }
+  @media screen and (max-width:910px) {
+    height: 78vh;  
+  }
     overflow-y: scroll;
     @media screen and (min-height:1024px) {
     height: 905px;

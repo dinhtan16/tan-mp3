@@ -11,6 +11,12 @@ import AlbumLoading from "../components/Loading/albumLoading";
 const WeekChartPage = styled.section`
 padding: 40px 59px;
 /* height: 480px; */
+@media screen and (min-width:910px) {
+    height: 80vh;  
+  }
+  @media screen and (max-width:910px) {
+    height: 80vh;  
+  }
 ::-webkit-scrollbar {
     width: 3px;
   }
@@ -26,21 +32,11 @@ padding: 40px 59px;
     background: #555;
   }
 overflow-y: scroll;
-@media screen and (max-width:880px) {
-    height: 480px; 
-  }
-  @media screen and (max-height:500px) {
-    height: 210px;
-  }
+
 /* @media screen and (max-width:880px) {
     height: 918px; 
   } */
-@media screen and (min-width:880px) {
-    height: 540px;  
-  }
-  @media screen and (min-height:1124px) {
-    height: 968px;
-  }
+
 `
 const WeekChartTop = styled.div`
     .title-week{

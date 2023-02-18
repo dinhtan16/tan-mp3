@@ -7,11 +7,11 @@ export const DetailPlaylistContainer = styled.div`
   /* max-height:calc(3/2); */
   height: 548px;
 
-  @media screen and (min-height:1024px) {
-    height: 920px;
+  @media screen and (min-width:910px) {
+    height: 80vh;  
   }
-  @media screen and (max-height:500px) {
-    height: 210px;
+  @media screen and (max-width:910px) {
+    height: 78vh;  
   }
   /* height: 100%; */
   overflow-y: scroll;

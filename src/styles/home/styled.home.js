@@ -21,22 +21,15 @@ padding: 30px 59px;
 /* display: flex;
 flex-direction: column;
 gap:5rem; */
-@media screen and (max-width:880px) {
-    height: 490px; 
-  }
-  @media screen and (max-height:500px) {
-    height: 290px;
-  }
-   @media screen and (max-height:900px) {
-    height: 490px;
-  }
+
 /* @media screen and (max-width:880px) {
     height: 918px; 
   } */
-@media screen and (min-width:880px) {
-    height: 810px;  
+@media screen and (min-width:910px) {
+    height: 80vh;  
   }
-  @media screen and (min-height:1024px) {
-    height: 920px;
+  @media screen and (max-width:910px) {
+    height: 78vh;  
   }
+ 
 `;

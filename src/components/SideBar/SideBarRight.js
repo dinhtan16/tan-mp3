@@ -65,6 +65,7 @@ const SideBarContainer = styled.div`
     .album-next{
         margin-top: 10px;
         padding: 10px;
+        height: 100%;
       .album-from{
         margin: 8px 0;
         font-size: .9rem;
@@ -85,7 +86,7 @@ const SideBarContainer = styled.div`
       }
     }
     .album-list,.recent-played{
-      height: 350px;
+      height: 70%;
       overflow-y: scroll;
       ::-webkit-scrollbar {
     width: 3px;
@@ -104,9 +105,9 @@ const SideBarContainer = styled.div`
     
     }
     .recent-played{
-      height: 500px;
+      height: 80%;
       @media screen and (min-height:1024px) {
-        height: 980px;
+        min-height: 980px;
       }
     }
 `

@@ -331,15 +331,10 @@ const Player = () => {
         setCurrSecond(0);
         dispatch(setIsPlayAudio(false));
       } else {
-<<<<<<< HEAD
         let keys =data && Object.keys(data);
         let audioInfo = data[keys[0]];
         setAudioData(audioInfo);
-=======
-//         let keys =data && Object.keys(data);
-//         let audioInfo = data[keys[0]];
-        setAudioData(res?.data.data['128']);
->>>>>>> 63cea331ca915d628734ca67f1ab7ed42420c93a
+
       }
     };
     fetchAudio();

@@ -14,8 +14,8 @@ export const lightTheme = {
     chartSongBgr:'rgba(255,255,255,0.5)',
     Mode:'#355ED7',
     colorMode:'#fff',
-    hoverTitle:'#844D4D'
-
+    hoverTitle:'#844D4D',
+    player:'#dedad1'
 }
 
 
@@ -35,7 +35,8 @@ export const darkTheme = {
     chartSongBgr:'#22354e',
     Mode:'#fff',
     colorMode:'#355ED7',
-    hoverTitle:'#fff'
+    hoverTitle:'#fff',
+    player:'#162a45'
 
 
 }
